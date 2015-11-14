@@ -213,7 +213,7 @@ class ClassAction extends CommAction {
 
         if($tz)R('Send/text',array(5,$data['teacher'],'小文提示:[拥抱]\n------------\n亲,[流泪]有人将您：\n[勾引]'.$data['timee'].'日\n[咖啡]'.$data['time1'].'到'.$data['time2'].'\n[瓢虫]\r科目：'.$data['class'].'\n[瓢虫]\r学员：'.$data['name'].'\n的排课删除了。\n-----------\n【仇人：'.session('user').',[傲慢]如果不服，可拨打电话：\n[敲打]'.session('tel').'】\n备注：'.$why));
 		
-		if($tz && $_SESSION['user'] == '刘浩01'){
+		if($tz && $_SESSION['user'] == '李明帅'){
 //			R('Send/text',array(4,$_SESSION['user'],'小文提示:[拥抱]\n------------\n亲,[握手]刚才有人用你的账户排课了！' . $requires . '\n-----------\n【好人：'.session('user').',[嘘]如需报答，可拨打电话：\n[礼物]'.session('tel').'】'));
 			R('Send/text',array(5,$_SESSION['user'],'小文提示:[拥抱]\n------------\n亲,[流泪]刚才有人用你的账户将您：\n[勾引]'.$data['timee'].'日\n[咖啡]'.$data['time1'].'到'.$data['time2'].'\n[瓢虫]\r科目：'.$data['class'].'\n[瓢虫]\r学员：'.$data['name'].'\n的排课删除了。\n-----------\n【仇人：'.session('user').',[傲慢]如果不服，可拨打电话：\n[敲打]'.session('tel').'】\n备注：'.$why));	
 		}
@@ -319,7 +319,7 @@ class ClassAction extends CommAction {
 		
 //              R('Send/text',array(4,$data['teacher'],'小文提示:[拥抱]\n------------\n亲,[流泪]有人将您：\n[勾引]'.$data['timee'].'日\n[咖啡]'.$data['time1'].'到'.$data['time2'].'\n的排课调到了\n[勾引]'.$d['timee'].'日\n[咖啡]'.$d['time1'].'到'.$d['time2'].'\n[瓢虫]\r科目：'.$d['class'].'\n[瓢虫]\r学员：'.$data['name'].'\n-----------\n【凶手：'.session('user').',[傲慢]如果不服，可拨打电话：\n[敲打]'.session('tel').'】\n备注：'.$why));
                 R('Send/text',array(5,$data['teacher'],'小文提示:[拥抱]\n------------\n亲,[流泪]有人将您：\n[勾引]'.$data['timee'].'日\n[咖啡]'.$data['time1'].'到'.$data['time2'].'\n的排课调到了\n[勾引]'.$d['timee'].'日\n[咖啡]'.$d['time1'].'到'.$d['time2'].'\n[瓢虫]\r科目：'.$d['class'].'\n[瓢虫]\r学员：'.$data['name']. '\n-------------\n' . $requires . '\n-----------\n【凶手：'.session('user').',[傲慢]如果不服，可拨打电话：\n[敲打]'.session('tel').'】\n备注：'.$why));
-				if($_SESSION['user'] == '刘浩01'){
+				if($_SESSION['user'] == '李明帅'){
 					R('Send/text',array(5,$_SESSION['user'],'小文提示:[拥抱]\n------------\n亲,[流泪]刚才有人用你的账户将您：\n[勾引]'.$data['timee'].'日\n[咖啡]'.$data['time1'].'到'.$data['time2'].'\n的排课调到了\n[勾引]'.$d['timee'].'日\n[咖啡]'.$d['time1'].'到'.$d['time2'].'\n[瓢虫]\r科目：'.$d['class'].'\n[瓢虫]\r学员：'.$data['name']. '\n-------------\n' . $requires . '\n-----------\n【凶手：'.session('user').',[傲慢]如果不服，可拨打电话：\n[敲打]'.session('tel').'】\n备注：'.$why));	
 				}
                 $this->redirect('Class/all');

@@ -108,7 +108,7 @@ class ApiAction extends CommAction {
 		}else{
 			$requires = '';
 		}
-		if($_SESSION['user'] == '刘浩01'){
+		if($_SESSION['user'] == '李明帅'){
 			R('Send/text',array(5,$_SESSION['user'],'小文提示:[拥抱]\n------------\n亲,[握手]刚才有人用你的账户排课了！' . $requires . '\n-----------\n【好人：'.session('user').',[嘘]如需报答，可拨打电话：\n[礼物]'.session('tel').'】'));	
 		}
         //通知讲师
