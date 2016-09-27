@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../Public/css/common.css" type="text/css" />
+<script src="../Public/js/jquery.min.js"></script>
+<script src="../Public/js/jquery.timeselectsingle.js"></script>
+<script language="javascript" type="text/javascript" src="../Public/js/WdatePicker.js"></script>
+
+<title>课表更新</title>
+
+<script type="text/javascript">
+	function check_message() {
+		if (window.document.leavemsg.cs_time1.value == "") {
+			alert("完成课表时段设置再提交！");
+			document.leavemsg.cs_time1.focus();
+			return false;
+		}
+		if (document.leavemsg.cs_time2.value == "") {
+			alert("完成课表时段设置再提交！");
+			document.leavemsg.cs_time2.focus();
+			return false;
+		}
+	}
+</script>
+
+
+
+<style type="text/css">
+<!--
+.STYLE1 {color: #000000}
+.bc {
+	height: 40px;
+	width: 120px;
+	color: #FFFFFF;
+	background-color: #663333;
+	font-weight: bold;
+	font-size: 18px;
+}
+.th1 {
+	height: 30px;
+	width: 100px;
+	font-size: 15px;
+	font-weight: bolder;
+	color: #FFFFFF;
+	font-family: "宋体";
+	text-decoration: blink;
+	background-color: #996600;
+}
+-->
+</style>
+</head>
+
+<body>
+        <form action="__URL__/add" method="post" name="leavemsg" id="leavemsg">
+		<div  style="background:#99CC33"><br/>
+		  <blockquote class="STYLE1">
+		    <h2>添加课程</h2>
+	      </blockquote><br/>
+		</div>
+<div id="man_zone">
+  <p>&nbsp;</p>
+  <table width="95%" border="0" align="center">
+                <tr>
+                  <td width="22%"><label>
+                    <div align="center">选择时间：
+                      <input name="time"  type="text" class="Wdate" id="time" style="
+    width: 100px;
+"  onclick="WdatePicker()"/>
+                  </div></td>
+                  <td width="34%"><div align="center">
+                    学员姓名：
+                    <input name="name" type="text" id="name" size="10" />
+                  </div></td>
+                  <td width="44%"><p align="center">时间：
+                    <input name="time1"  type="text"  class="timeSelectSingle" id="time1" size="5" />
+                    -
+  <input name="time2"  type="text"  class="timeSelectSingle" id="time2" size="5" />
+                    科目：
+  <input name="course" type="text" id="course" size="5" />
+                    讲师：
+  <input name="teacher" type="text" id="teacher" size="5" />
+                  </p></td>
+      </tr>
+    </table>
+  <div align="center">
+    <p>
+      <input name="submit" type="submit" class="bc" value="添加课程" onclick="return check_message()" />
+    </p>
+  </div>
+</div>
+
+<div align="center">提示：这里适于临时添加少量有变动的课程，批量添加课程建议在相应学员课表管理中批量添加。
+        </div>
+</form>
+</body>
+</html>

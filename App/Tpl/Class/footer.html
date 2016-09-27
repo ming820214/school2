@@ -1,0 +1,407 @@
+<script type="text/javascript">
+  $(document).ready(function(){
+      var str = new Date();
+      var anchor_str = str.getFullYear() + '-'  + ((str.getMonth()+1)<10? ('0' + (str.getMonth()+1)):(str.getMonth()+1)) + '-' + (str.getDate()<10?('0' + str.getDate()):str.getDate());
+
+      if($("#" + anchor_str).length == 1){
+      		$('body').scrollTop($("#" + anchor_str).position().top-105);	
+      }
+      
+  });
+
+// 按钮隐藏显示
+  $(".cla").mouseover(function(){
+    $(this).next(".clb").show();
+  });
+  $(".cla").mouseleave(function(){
+    $(this).next(".clb").hide();
+  });
+  $(".clb").mouseover(function(){
+    $(this).show();
+  });
+  $(".clb").mouseleave(function(){
+    $(this).hide();
+  });
+//删除操作
+  function delt (th,cid) {
+      var why=prompt("删除原因（必填）：",'');
+      if(why)
+      {
+        $.ajax({
+           type: "POST",
+           url: "<{:U('Class/delt')}>",
+           data: "cid="+cid+"&why="+why,
+           success: function(msg){
+            if(msg==11){
+              $(th).parent().prev().remove(".cla");
+              $(th).parent().next().remove("hr");
+              $(th).parent().remove();
+            }else{
+              alert('数据删除失败，请刷新页面重试……');
+            }
+           }
+        });
+      }
+  }
+//确认操作
+  function qr (th,cid) {
+    if(confirm("课时确认，实际上课时段如有不同点击取消"))
+    {
+        $.ajax({
+           type: "POST",
+           url: "<{:U('Class/qr')}>",
+           data: "cid="+cid,
+           success: function(msg){
+            if(msg==11){
+              $(th).parent().prev().css({'border-left':"3px solid blue"});
+              $(th).parent().remove();
+            }else{
+              alert('课程确认出错，请刷新页面重试……');
+            }
+           }
+        });
+    }else{
+      var why=prompt("实际课时数及产生原因（必填）：",'');
+      if(why){
+        $.ajax({
+           type: "POST",
+           url: "<{:U('Class/qr')}>",
+           data: "cid="+cid+"&why="+why,
+           success: function(msg){
+            if(msg==11){
+              $(th).parent().prev().css({'border-left':"3px solid blue"});
+              $(th).parent().remove();
+            }else{
+              alert('课程确认出错，请刷新页面重试……');
+            }
+           }
+        });
+      }
+    }
+  }
+//旷课操作
+  function kk (th,cid) {
+      var why=prompt("旷课原因（必填）：",'');
+      if(why)
+      {
+        $.ajax({
+           type: "POST",
+           url: "<{:U('Class/kk')}>",
+           data: "cid="+cid+"&why="+why,
+           success: function(msg){
+            if(msg==11){
+              $(th).parent().prev().css({'border-left':"3px solid red"});
+              $(th).parent().remove();
+            }else{
+              alert('课程确认出错，请刷新页面重试……');
+            }
+           }
+        });
+      }
+  }
+//变更排课
+  function change (th,cid) {
+    $("#myModal3").find("input[name='cid']").val(cid);
+  }
+
+  //批量删除原因
+   function whyy(th){
+      var whyy=prompt("删除原因（必填）：","")
+      if(whyy){
+        $(th).prev().val(whyy);
+        return true;
+      }else{
+        return false;
+      }
+  }
+</script>
+<script type="text/javascript" src="../Public/js/box.js"></script>
+<link rel="stylesheet" type="text/css" href="../Public/css/footer.css">
+<script src="../Public/js/jquery.timeselectsingle.js"></script>
+<script language="javascript" type="text/javascript" src="../Public/js/WdatePicker.js"></script>
+<link href="../Public/js/skin/WdatePicker.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+  var url='__GROUP__';
+</script>
+<div style="height:40px;"></div>
+<div class="foot"><ul>
+  <foreach name='teacher' item='v'>
+    <li><a><{$key}></a>
+      <ul><volist name='v' id='t1'><li><a href="<{:U('Class/all')}>?teacher=<{$t1}>"><{$t1}></a></li></volist>
+      </ul>
+    </li>
+  </foreach>
+</ul></div>
+
+
+
+
+
+
+
+
+
+<form action="__GROUP__/Index/class_st" method="post">
+<div id="myModal" class="reveal-modal"><a class="close-reveal-modal">&#215;</a>
+    <div>
+      <h2>快捷排课,
+      <if condition="$Think.get.sid neq ''">
+          <{$name}>-<{$std_id}>
+          <input type="hidden" name="id" aa="student" value="<{$Think.get.sid}>">
+      <elseif condition="$Think.get.gid neq ''"/>
+          <{$name}>
+          <input type="hidden" name="id" aa="grade" value="<{$Think.get.gid}>">
+      <else/>
+        <select class="xuan" id="xuan">
+        <option value="4">选择</option>
+        <option value="0">学员：</option>
+        <option value="1">班级：</option>
+        <option value="2">试听：</option>
+        </select>
+      </if></h2>
+    </div><hr/>
+  <div id="tishi" class="tishi" align="center"></div>
+  <div class="box _bowarpper">
+    <input type="hidden" name="box[]"/>
+  </div>
+  <div style="text-align: center;background-color: beige;padding:5px;" id="showBtn">
+  <hr/>
+    <button type="button" onclick="table_change(1)">+</button>&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" onclick="table_change(2)">-</button>
+  <hr/>
+  	<div style="width:640px;">
+    	<div style="float:left;margin-top: 17px;margin-left:30px;">上课要求：</div><textarea name="remark" rows="3" cols="50" placeholder="可以在此提出对上课老师的要求，字数限制60以内!" maxlength="60"></textarea>
+    </div>
+    <input style="position:relative;right:-345px;" type="button" value="添加保存" onclick="return pclass()" id="cs"/>
+  <hr/>
+  </div>
+  <div class="boxfoot">
+  <ul>
+    <foreach name='teacher' item='v'>
+      <li><a><{$key}></a>
+        <ul><volist name='v' id='t1'><li><a href="<{:U('Class/all')}>?teacher=<{$t1}>"><{$t1}></a></li></volist>
+        </ul>
+      </li>
+    </foreach>
+  </ul>
+  </div>
+</div>
+</form>
+
+
+
+
+
+
+
+
+
+
+<form action="__GROUP__/Index/large" method="post">
+<div id="myModal2" class="reveal-modal"><a class="close-reveal-modal">&#215;</a>
+    <div  style="margin-bottom: 15px;">
+      <h1>查询助手</h1><hr/>
+      日期<input  name="timea"  class="Wdate" type="text" onfocus="WdatePicker()" style="width: 100px;margin: 5px;" readonly="readonly"/>到
+      <input  name="timeb"  class="Wdate" type="text" onfocus="WdatePicker({minDate:'%y-%M-{%d}'})" style="width: 100px;margin: 5px;" readonly="readonly"/>时间<input onChange="value=value.replace(/[^:?\d]/g,'')" name="t1"  type="text"  class="timeSelectSingle2" size="3" readonly="readonly" value="00:00" />-----<input onChange="value=value.replace(/[^:?\d]/g,'')" name="t2"  type="text"  class="timeSelectSingle" size="3" readonly="readonly" value="23:45" />
+      <if condition="$Think.get.sid neq ''"><{$name}><input type="hidden" name="stuid" value="<{$Think.get.sid}>"><elseif condition="$Think.get.gid neq ''"/><{$name}><input type="hidden" name="g" value="<{$Think.get.gid}>"><else/>
+      <select class="xuan" id="xuan">
+      <option value="4">全部</option>
+      <option value="0">学员：</option>
+      <option value="1">班级：</option>
+      <option value="2">试听：</option>
+      <option value="3">讲师：</option>
+      </select>
+      </if>
+    </div><a href="#" id="quanA">全选</a>/<a href="#" id="quanB">全取消</a><input type="button" value="查询" id="search" class="inp"><hr/>
+<div id="tishi2" class="tishi2" align="center"></div>
+<div></div>
+        <div style="text-align: right;"><input type="hidden" name="why"><input type="submit" name="sub2" onclick="return whyy(this)" value="删除选中的排课"></div><hr/>
+</div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<form action="<{:U('Class/change')}>" method="post">
+  <div id="myModal3" class="reveal-modal"><a class="close-reveal-modal">&#215;</a>
+    <h2>变更排课：<input type="hidden" name="cid"></h2>
+    <hr/>
+      <div class="over" style="max-height: 160px;">
+        <div class="row">日期：<input name="date"  class="Wdate" type="text" onfocus="WdatePicker({minDate:'%y-%M-{%d}',dchanging:cDayFunc})" style="width: 100px;margin: 10px;"  required="true"/>时间：<input onChange="value=value.replace(/[^:?\d]/g,'')" name="time1"  type="text"  class="timeSelectSingle2" size="3" readonly="readonly" required="true"/>-----<input onChange="value=value.replace(/[^:?\d]/g,'')" name="time2"  type="text"  class="timeSelectSingle" size="3" readonly="readonly" required="true"/>&nbsp;&nbsp;变更原因：<input type="text" name="why" required="true">
+        </div>
+        <div class="row">
+			    	<div style="float:left;margin-top:15px;">上课要求：</div><textarea name="remark" rows="3" cols="65" placeholder="可以在此提出对上课老师的要求，字数限制60以内!" maxlength="60"></textarea>
+			    	<div style="float:right;margin-right: 120px;margin-top: 15px;"><input type="submit" name="change" value="确认变更"></div>
+        </div>
+      </div>
+    <div class="tishi2" align="center" style="padding:0px;">
+      <div id="tishi3"></div>
+    </div>
+  </div>
+</form>
+
+<script>
+
+$(function() {
+$('#showBtn').hide();
+<if condition="$Think.get.sid neq ''">
+  init(<{:json_encode($oneCourseList)}>);
+</if>
+<if condition="$Think.get.gid neq ''">
+  init(<{:json_encode($oneCourseList)}>);
+</if>
+});
+
+function init(data) {
+  oneCourseList = data;
+  htmlA = '<table width="800" border="0" align="center" class="find">\
+                <tr>\
+                  <th align="left" valign="top" valign="baseline"><button type="button" id="classadd">+</button><a class="font">排课</a><button type="button" id="classdelt">-</button>\
+                    <div class="over">\
+                            <div class="row">时间：<input onChange="value=value.replace(/[^:?\\d]/g,\'\')" name="time1"  type="text"  class="timeSelectSingle2" size="3" readonly="readonly"/>-<input onChange="value=value.replace(/[^:?\\d]/g,\'\')" name="time2"  type="text"  class="timeSelectSingle" size="3" readonly="readonly"/>可选课程：<select style="max-width:380px" class="tocourse" name="course_id[]">'+
+                            fillOptionAr(oneCourseList)+'</select>\
+                            </div>\
+                    </div>\
+                  </th>\
+                  <td width="200" align="left" valign="top"><button type="button" id="timeadd">日期+</button><a class="font">时间</a><button type="button" id="timedelt">日期-</button><button type="button" id="week">星期++</button>\
+                    <div class="over">\
+                      <div class="row2">\
+                         <input  name="date"  class="Wdate" type="text" onfocus="WdatePicker({minDate:\'%y-%M-{%d}\'})" style="width: 100px;margin: 5px;" readonly="readonly"/>\
+                      </div>\
+                    </div>\
+                  </td>\
+              </tr>\
+            </table>';
+  $('._bowarpper').prepend(htmlA);
+  htmlB = '\
+                            <div class="row">时间：<input onChange="value=value.replace(/[^:?\\d]/g,\'\')" name="time1"  type="text"  class="timeSelectSingle2" size="3" readonly="readonly"/>-<input onChange="value=value.replace(/[^:?\\d]/g,\'\')" name="time2"  type="text"  class="timeSelectSingle" size="3" readonly="readonly"/>可选课程：<select style="max-width:380px" class="tocourse" name="course_id[]">'+
+                            fillOptionAr(oneCourseList)+'</select>\
+                            </div>\
+           ';
+				
+        if($('._bowarpper input[name="date"]')){
+        	$('#showBtn').show();
+        }
+}
+
+//试听课使用
+htmlC = '<table width="800" border="0" align="center" class="find">\
+              <tr>\
+                <th align="left" valign="top" valign="baseline"><button type="button" id="classadd">+</button><a class="font">排课</a><button type="button" id="classdelt">-</button>\
+                  <div class="over">\
+                    <div class="row">时间：<input onChange="value=value.replace(/[^:?\\d]/g,\'\')" name="time1"  type="text"  class="timeSelectSingle2" size="3" readonly="readonly"/>-<input onChange="value=value.replace(/[^:?\\d]/g,\'\')" name="time2"  type="text"  class="timeSelectSingle" size="3" readonly="readonly"/>科目：<select name="kemu"><option selected="selected">科目</option><option>语文</option><option>数学</option><option>英语</option><option>物理</option><option>化学</option><option>生物</option><option>政治</option><option>历史</option><option>地理</option></select>讲师：<select name="teacher" ></select></div>\
+                  </div>\
+                </th>\
+                <td width="200" align="left" valign="top"><button type="button" id="timeadd">日期+</button><a class="font">时间</a><button type="button" id="timedelt">日期-</button><button type="button" id="week">星期++</button>\
+                  <div class="over">\
+                    <div class="row2">\
+                       <input  name="date"  class="Wdate" type="text" onfocus="WdatePicker({minDate:\'%y-%M-{%d}\'})" style="width: 100px;margin: 5px;" readonly="readonly"/>\
+                    </div>\
+                  </div>\
+                </td>\
+            </tr>\
+          </table>';
+//试听课使用内部添加
+htmlD = '\
+            <div class="row">时间：<input onChange="value=value.replace(/[^:?\\d]/g,\'\')" name="time1"  type="text"  class="timeSelectSingle2" size="3" readonly="readonly"/>-<input onChange="value=value.replace(/[^:?\\d]/g,\'\')" name="time2"  type="text"  class="timeSelectSingle" size="3" readonly="readonly"/>科目：<select name="kemu"><option selected="selected">科目</option><option>语文</option><option>数学</option><option>英语</option><option>物理</option><option>化学</option><option>生物</option><option>政治</option><option>历史</option><option>地理</option></select>讲师：<select name="teacher" ></select></div>\
+        ';
+
+function fillOptionAr(list, id){
+    var html = "";
+    for(var x in list){
+        var selected = '';
+        if(list[x].id == id){
+            selected = ' selected';
+        }
+
+        var title = ' title="订购：'+list[x].hour+'+'+list[x].ext_hour+' 待确认：'+list[x].unconfirmed_hour+' 已确认：'+list[x].used_hour+'"';
+
+        html += '<option'+title+' value="'+list[x].xid+'" '+selected+'>【'+list[x].id+'】 '+list[x].subject_name +' '+ list[x].teacher +' '+ list[x].plan_name+'</option>';
+    }
+   return html;
+}
+
+
+function pclass() {
+		
+		var flag_test_lession = true; //判断试听课是否超过了30分钟，超过了就不提交，否则就提交；
+		
+    $("#tishi").empty();
+    var box =[];
+    if($("#xuan").val()==4)return false;
+    $(".find").each(function(e){//e为对象序列
+        // 获取上课信息组
+        box[e]=[[],[]];
+        
+        $(this).find("th .row").each(function(i){
+        	//针对每行时间都判断试听课是否超过了30分钟，超过了就不提交，否则就提交；
+        	 if($("#xuan").val()==2){
+        	 	
+        	 		var st1 = $(this).find("input[name='time1']").val();
+        	 		var st2 = $(this).find("input[name='time2']").val();
+        	 		
+        	 		//判断时间差计算课时数
+        	 		var cur_dd = new Date();
+        	 		var today_date = cur_dd.getFullYear() + "-" + ((cur_dd.getMonth()+1)<=9?('0' + (cur_dd.getMonth()+1)):(cur_dd.getMonth()+1)) + "-" + (cur_dd.getDate()<=9?('0' + cur_dd.getDate()):cur_dd.getDate());
+        	 		var stt1 = Date.parse(new Date(today_date + " " + st1 + ":00"))/1000;
+        	 		var stt2 = Date.parse(new Date(today_date + " " + st2 + ":00"))/1000;
+		          
+		          if(stt2>stt1){
+		            var hour_count=(stt2-stt1)/3600;
+            		if(hour_count>0.5){
+            			alert("试听课只能预排0.5小时，超出部分请按正常排课流程走，先下订单后排课!");
+            			flag_test_lession = false;
+            			return false;
+            		}
+        	 		}
+		      }
+        	 
+          box[e][0][i]=[$(this).find("input[name='time1']").val(),$(this).find("input[name='time2']").val(),$(this).find("select[name='course_id[]']").val(),$(this).find("select[name='kemu']").val(),$(this).find("select[name='teacher']").val()];
+        });
+
+         // 获取时间组
+         $(this).find("td input[name='date']").each(function(ii){
+            box[e][1][ii]=$(this).val();
+         });
+    });
+    
+    if(!flag_test_lession){
+    	//判断试听课是否超过了30分钟，超过了就不提交，否则就提交；
+    	return flag_test_lession; //超过30分钟，放弃提交。
+    }
+
+    if($("#xuan").val()==2){
+        var id=88888;
+        var type='student';
+        var other=$("#myModal").find('input[name="student"]').val();
+    }else if($("#xuan").val()==1 || $("#xuan").val()==0){
+        var id=$("#myModal").find("select[name='id']").val();
+        var type=$("#myModal").find("select[name='id']").attr('aa');
+        var other='';
+    }else{
+        var id=$("#myModal").find("input[name='id']").val();
+        var type=$("#myModal").find("input[name='id']").attr('aa');        
+    }
+		
+		var remark = $('textarea[name=remark]').val();
+		
+    $.post("<{:U('Api/class_add')}>",{id:id,type:type,box:box,other:other,remark:remark},function(msg){
+        if(msg.state=='ok')location.reload();
+        if(msg.state==2)$("#tishi").text(msg.info + ':' + msg.data.timee+',时间：'+msg.data.time1+'--'+msg.data.time2+',老师：'+msg.data.teacher);
+        if(msg.state==3 || msg.state==1 || msg.state==4)$("#tishi").text(msg.info);
+    });
+
+}
+
+
+
+</script>

@@ -1,0 +1,68 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../Public/css/my.css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+</head>
+<body>
+<div class="menu">
+<ul style="padding-left: 0px;margin-top:12px;">
+    <li class="menu_current"><a href="__URL__/comment">点评列表</a></li>
+</ul>
+</div>
+<div class="head"> 学员信息，课后点评管理页</div>
+<div style="height:60px"></div>
+<table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="30"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="15" height="30"><img src="../Public/images/tab_03.gif" width="15" height="30" /></td>
+        <td background="../Public/images/tab_05.gif"><img src="../Public/images/311.gif" width="16" height="16" /> <span class="STYLE4"> 校区所有学员列表</span></td>
+        <td width="14"><img src="../Public/images/tab_07.gif" width="14" height="30" /></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="9" background="../Public/images/tab_12.gif">&nbsp;</td>
+        <td bgcolor="e5f1d6"><table width="99%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CECECE">
+          <tr>
+            <td width="10%" height="26" background="../Public/images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">ID</div></td>
+            <td width="12%" height="18" background="../Public/images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">姓名</div></td>
+            <td width="45%" height="18" background="../Public/images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1">上次点评</div></td>
+            <td width="14%" height="18" background="../Public/images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">点评教师</div></td>
+            <td width="19%" height="18" background="../Public/images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2">添加更新评价</div></td>
+          </tr>
+		<volist name="st" id="vo">
+       <tr><td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE1"><{$vo.id}></div></td>
+       <td height="18" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1"><{$vo.name}></div></td>
+      <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1"><{$vo.comment2}></div></td>
+       <td height="18" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1"><{$vo.ctteacher}></div></td>
+      <td height="18" bgcolor="#FFFFFF"><div align="center"><img src="../Public/images/037.gif" width="9" height="9" /><span class="STYLE1"> [</span><a href="__URL__/comment_up?id=<{$vo.id}>">添加点评</a><span class="STYLE1">]</span></div></td>
+  
+		<php> 
+		$count++;		</php>	
+    </volist>
+        </table></td>
+        <td width="9" background="../Public/images/tab_16.gif">&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="29"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="15" height="29"><img src="../Public/images/tab_20.gif" width="15" height="29" /></td>
+        <td background="../Public/images/tab_21.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="40%"><div align="left"><span class="STYLE1">当前共<php> echo $count;</php>名学员信息</span></div></td>
+            <td width="60%" class="STYLE1">&nbsp;</td>
+          </tr>
+        </table></td>
+        <td width="14"><img src="/tab_22.gif" width="14" height="29" /></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</body>
+</html>

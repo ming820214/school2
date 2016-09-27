@@ -1,0 +1,67 @@
+<include file="header" />
+<script language="javascript" type="text/javascript" src="../Public/js/WdatePicker.js"></script>
+<link rel="stylesheet" type="text/css" href="../Public/time/jquery.datetimepicker.css"/>
+<div style=" height:20px"></div>
+<!-- 待确认 -->
+<notempty name="t">
+<form action="__URL__/tqr" method="get">
+<table width="90%" border="4" align="center" bordercolor="#FFFFFF" bgcolor="#FFFFFF">
+  <tr>
+    <th align="left"><img src="../Public/images/wx/t02.png" width="40" height="40" /></th>
+    <th>新增待确认的排课<input name="id" value="a" type="hidden"></th>
+    <th><input name="tqr" type="submit" value="确认全部"></th>
+  </tr>
+</table>
+</form>
+<!-- 确认详情 -->
+<div class="tb222">
+  <div class="tb22" >
+      <ul class="inner-bg">
+          <li>
+            <table  width="95%" align="center" border="0" bgcolor="#FF9999">
+              <foreach name="t" item="tc" key="k">
+                <tr><th align="center" colspan="2"><h4><{$k}></h4></th></tr>
+                  <foreach name="tc" item="tcc" key="kk">
+                <tr><{$tcc}><td bgcolor="#CCCCCC" align="center"><a href="__URL__/tqr/id/<{$kk}>">确认</a></td></tr>
+                  </foreach>
+              </foreach>
+              <tr><td colspan="4"></td></tr>
+            </table>
+          </li>
+      </ul>
+  </div>
+</div>
+</notempty>
+<!-- 时间查询 -->
+<form action="" method="post" id="date">
+<table width="90%" border="4" align="center" bordercolor="#FFFFFF" bgcolor="#FFFFFF">
+  <tr>
+    <th align="left"><img src="../Public/images/wx/t01.png" width="40" height="40" /></th>
+    <th width="30%">时间：<input name="name" type="hidden" value="<{$tc_name}>"></th>
+    <th><input type="text" name="date" onfocus="WdatePicker()" readonly="readonly" style="width:90%;" onchange="document.getElementById('date').submit()"/></th>
+  </tr>
+  <tr><th colspan="3">我的近期全部排课</th></tr>
+</table>
+</form>
+<!-- 排课详情 -->
+<div class="tb222">
+  <div class="tb22" >
+      <ul class="inner-bg">
+          <li>
+            <table  width="95%" align="center" border="10" bordercolor="#FFFFCC" bgcolor="#FFFFCC">
+            <empty name="c"><tr><th>没有查询到相关数据……</th></tr><else/>
+            <foreach name="c" item="vc">
+              <tr><th align="center" colspan="2"><h3><{$key}></h3></th></tr>
+                <volist name="vc" id="vcc">
+                  <{$vcc}>
+                </volist>
+            </foreach>
+            </empty>
+            </table>
+			    </li>
+			</ul>
+	</div>
+</div>
+
+<div align="center"><img src="../Public/images/wx/dx.jpg" width="100%" /></div>
+<include file="footer"/>

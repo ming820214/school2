@@ -1,0 +1,46 @@
+<include file="header" />
+<div style=" height:20px"></div>
+
+<div style=" height:20px"></div>
+
+<table width="90%" border="4" align="center" bordercolor="#FFFFFF" bgcolor="#FFFFFF">
+  <tr>
+    <th width="9%" scope="row"><img src="../Public/images/wx/0012.png" width="24" height="20" /></th>
+    <th width="81%" scope="row"><div align="left" class="STYLE2">近期课表：</div></th>
+    <th width="10%" scope="row">&nbsp;</th>
+  </tr>
+
+</table>
+
+<div class="tb222"><div class="tb22" >
+
+			<ul class="inner-bg">
+            <li>
+
+<table  width="95%" align="center" border="10" bordercolor="#FFFFCC" bgcolor="#FFFFCC">
+<foreach name="c" item="vc">
+  <tr>
+    <th><h3><{$key}></h3></th>
+  </tr>
+    <volist name="vc" id="vcc">
+  <tr>
+    <td><div align="left"><{$vcc}></div><br></td>
+  </tr>
+    </volist>
+</foreach>
+</table>
+
+			</li>
+
+			</ul>
+			</div></div>
+
+
+
+
+<div align="center"><img src="../Public/images/wx/dx.jpg" width="100%" />
+<div style=" height:20px"></div>
+
+
+</div>
+<include file="footer" />

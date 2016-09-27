@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>校区排课系统</title>
+    <link rel="stylesheet" type="text/css" href="../Public/aaa/css/style.css">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <style>
+    .tabl {
+      text-align: center;
+      line-height: 50px;
+      font-weight: bold;
+      color: white;
+      background-color: #fd6464;
+      font-size: 16px;
+    }
+    .box {
+      background: burlywood;
+      padding: 25px;
+      max-height: 400px;
+      overflow-y: auto;
+      margin-top: -6px;
+      display: none;
+    }
+    .box2 {
+      margin: 10px;
+      background: wheat;
+      padding: 5px;
+      width: 150px;
+      float:left;
+    }
+    .table {
+      float: left;
+      width: 200px;
+    }
+    .in {
+      margin-top: 20px;
+      margin-left: 20px;
+      padding: 5px;
+      width: 100px;
+    }
+    </style>
+</head>
+
+</head>
+<body  style="margin-left:200px;">
+<div class="left-gg">
+     <ul>
+         <li><a href="__URL__/sc_ad"><em class="gg"></em>校区公告</a></li>
+         <li><a href="__URL__/sc_teacher"><em class="js"></em>讲师管理</a></li>
+         <li><a href="__URL__/sc_class" class="current"><em class="xz"></em>小组管理</a></li>
+         <li><a href="__URL__/ban_rules"><em class="mm"></em>禁排规则</a></li>
+         <li><a href="__URL__/sc_set"><em class="mm"></em>密码修改</a></li>
+     </ul>
+</div>
+<div class="right-gg">
+     <div class="head-t">小组管理</div>
+     <div class="main-zt">
+        <div class="rq-Table">
+         <div class="tou" id="gd2">
+                 <ul>
+                   <li style=" float: right;"><button type="button" class="but" onclick="$('.rq-course').hide();$('#gd2').hide();$('#gaod').show();$('.box').show();">创建小组</button></li>
+                 </ul>
+          </div>
+           <div class="rq-course">
+              <table  width="100%" border="0" cellspacing="0" cellpadding="0" class="tabl">
+                <tr>
+                  <td width="150">小组名称</td>
+                  <td width="500">小组学员</td>
+                  <td width="150">备注信息</td>
+                  <td width="200">操作</td>
+                </tr>
+              </table>
+              <div class="table-c" style="background-color: beige;">
+                  <table  width="100%" border="3" cellspacing="0" cellpadding="0" >
+                    <volist name="grade" id="g">
+                    <tr>
+                      <th width="150" scope="row"><{$g.name}></th>
+                      <td width="500"><volist name='g.grade' id='v'><{$v.name}>，</volist></td>
+                      <th width="150"><{$g.other}></th>
+                      <td width="200" align="center">
+                          <button class="but" onclick="change(<{$g.id}>,'<{$g.name}>')">变更学员</button>
+                          <button class="but" onclick="if(confirm( '同时删除所有没有完成的排课，确认删除吗？'))window.location.href= '__URL__/sc_class_del/gid/<{$g.id}>'">删除小组</button>
+                      </td>
+                    </tr>
+                    </volist>
+                  </table>
+             </div>
+          </div>
+         </div>
+      </div>
+</div>
+<div style="margin: 90px auto;width: 95%;">
+<form method="post">
+<div class="tou" id="gaod" style="display:none;">
+<input type="hidden" name="id">
+       <ul>
+         <li><span>小组名称</span><input class="mx01" type="text" name="name"></li>
+         <li><span>备注</span><input class="mx01" type="text" name="other"></li>
+         <li>
+         <li style=" float: right;"><input type="submit" class="but" value="新增保存" name="add" /></li>
+       </ul>
+</div>
+<div class="box">
+<table>
+  <tr>
+    <td>
+      <div style="width:100%;">
+      <volist name='vo' id='vo'>
+            <div class="box2">
+               <input name="box[]" type="checkbox" class="xuan" value="<{$vo.id}>">&nbsp;&nbsp;&nbsp;&nbsp;<{$vo.p}><{$vo.name}>
+            </div>
+        </volist>
+      </div>
+    </td>
+  </tr>
+</table>
+</div>
+</form>
+</div>
+<script>
+  function  change (id,name) {
+    $("#gaod").find("input[name='id']").val(id);
+    $("#gaod").find("input[name='name']").val(name);
+    $("#gaod").find("input[name='add']").attr('name','change');
+    $('.rq-course').hide();$('#gd2').hide();$('#gaod').show();$('.box').show();
+  }
+</script>
+</body>
+</html>
+

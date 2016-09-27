@@ -1,0 +1,144 @@
+<script type="text/javascript" src="../Public/js/jquery.min.js"></script>
+<script type="text/javascript" src="../Public/js/box.js"></script>
+<link rel="stylesheet" type="text/css" href="../Public/css/footer.css">
+<script src="../Public/js/jquery.timeselectsingle.js"></script>
+<script language="javascript" type="text/javascript" src="../Public/js/WdatePicker.js"></script>
+<link href="../Public/js/skin/WdatePicker.css" type="text/css" rel="stylesheet">
+<script type="text/javascript">
+  var url='__GROUP__';
+</script>
+<div style="height:40px;"></div>
+<div class="foot"><ul>
+<li><a>语文</a>
+  <ul><volist name='tc1' id='t1'><li><a href="__URL__/teacher/t/<{$t1}>"><{$t1}></a></li></volist>
+  </ul>
+</li>
+<li><a>数学</a>
+  <ul><volist name='tc2' id='t2'><li><a href="__URL__/teacher/t/<{$t2}>"><{$t2}></a></li></volist>
+  </ul>
+</li>
+<li><a>英语</a>
+  <ul><volist name='tc3' id='t3'><li><a href="__URL__/teacher/t/<{$t3}>"><{$t3}></a></li></volist>
+  </ul>
+</li>
+<li><a>物理</a>
+  <ul><volist name='tc4' id='t4'><li><a href="__URL__/teacher/t/<{$t4}>"><{$t4}></a></li></volist>
+  </ul>
+</li>
+<li><a>化学</a>
+  <ul><volist name='tc5' id='t5'><li><a href="__URL__/teacher/t/<{$t5}>"><{$t5}></a></li></volist>
+  </ul>
+</li>
+<li><a>生物</a>
+  <ul><volist name='tc6' id='t6'><li><a href="__URL__/teacher/t/<{$t6}>"><{$t6}></a></li></volist>
+  </ul>
+</li>
+<li><a>文综</a>
+  <ul><volist name='tc7' id='t7'><li><a href="__URL__/teacher/t/<{$t7}>"><{$t7}></a></li></volist>
+  </ul>
+</ul></div>
+
+
+
+<form action="__GROUP__/Index/class_st" method="post">
+<div id="myModal" class="reveal-modal"><a class="close-reveal-modal">&#215;</a>
+    <div>
+      <h2>快捷排课,<if condition="$student.name neq ''"><{$student.name}><input type="hidden" name="stuid" value="<{$student.id}>"><elseif condition="$grade.id neq ''"/><{$grade.name}><input type="hidden" name="g" value="<{$grade.id}>"><else/>
+      <select class="xuan" id="xuan">
+      <option value="4">选择</option>
+      <option value="0">学员：</option>
+      <option value="1">班级：</option>
+      <option value="2">试听：</option>
+      </select>
+      </if></h2>
+    </div><hr/>
+<div id="tishi" class="tishi" align="center"></div>
+      <div class="box">
+        <table width="700" border="0" align="center" class="find">
+            <tr>
+              <td align="left" valign="top" valign="baseline"><button type="button" id="classadd">+</button><a class="font">排课</a><button type="button" id="classdelt">-</button>
+                <div class="over">
+                        <div class="row">时间：<input onChange="value=value.replace(/[^:?\d]/g,'')" name="time1[]"  type="text"  class="timeSelectSingle" size="3" readonly="readonly"/>-<input onChange="value=value.replace(/[^:?\d]/g,'')" name="time2[]"  type="text"  class="timeSelectSingle" size="3" readonly="readonly"/>科目：<select name="class[]" >
+                                <option selected="selected">科目</option>
+                                <option>语文</option>
+                                <option>数学</option>
+                                <option>英语</option>
+                                <option>物理</option>
+                                <option>化学</option>
+                                <option>生物</option>
+                                <option>政治</option>
+                                <option>历史</option>
+                                <option>地理</option>
+                            </select>讲师：<select name="teacher[]" ></select>
+                        </div>
+                </div>
+              </td>
+              <td width="200" align="left" valign="top"><button type="button" id="timeadd">日期+</button><a class="font">时间</a><button type="button" id="timedelt">日期-</button><button type="button" id="week">星期++</button>
+                <div class="over">
+                  <div class="row2">
+                     <input  name="time[]"  class="Wdate" type="text" onfocus="WdatePicker({minDate:'%y-%M-{%d}'})" style="width: 100px;margin: 5px;" readonly="readonly"/>
+                  </div>
+                </div>
+              </td>
+          </tr>
+        </table>
+        <input type="hidden" name="box[]" />
+        <div style="text-align: center;background-color: beige;" id="but"><img src="../Public/images/more.png" style="width:20px;margin:3px;"></div>
+      </div><hr/>
+        <div style="text-align: right;" >
+        <input type="submit" value="添加保存" onclick="return pclass()" id="cs"/>
+        </div>
+        <hr/>
+<div class="boxfoot"><ul>
+<li><a>语文</a>
+  <ul><volist name='tc1' id='t11'><li><a href="__URL__/teacher/t/<{$t11}>" target="_blank"><{$t11}></a></li></volist>
+  </ul>
+</li>
+<li><a>数学</a>
+  <ul><volist name='tc2' id='t22'><li><a href="__URL__/teacher/t/<{$t22}>" target="_blank"><{$t22}></a></li></volist>
+  </ul>
+</li>
+<li><a>英语</a>
+  <ul><volist name='tc3' id='t33'><li><a href="__URL__/teacher/t/<{$t33}>" target="_blank"><{$t33}></a></li></volist>
+  </ul>
+</li>
+<li><a>物理</a>
+  <ul><volist name='tc4' id='t44'><li><a href="__URL__/teacher/t/<{$t44}>" target="_blank"><{$t44}></a></li></volist>
+  </ul>
+</li>
+<li><a>化学</a>
+  <ul><volist name='tc5' id='t55'><li><a href="__URL__/teacher/t/<{$t55}>" target="_blank"><{$t55}></a></li></volist>
+  </ul>
+</li>
+<li><a>生物</a>
+  <ul><volist name='tc6' id='t66'><li><a href="__URL__/teacher/t/<{$t66}>" target="_blank"><{$t66}></a></li></volist>
+  </ul>
+</li>
+<li><a>文综</a>
+  <ul><volist name='tc7' id='t77'><li><a href="__URL__/teacher/t/<{$t77}>" target="_blank"><{$t77}></a></li></volist>
+  </ul>
+</ul></div>
+</div>
+</form>
+
+<form action="__GROUP__/Index/large" method="post">
+<div id="myModal2" class="reveal-modal"><a class="close-reveal-modal">&#215;</a>
+    <div>
+      <h2>批量筛选：
+      <input  name="timea"  class="Wdate" type="text" onfocus="WdatePicker()" style="width: 100px;margin: 5px;" readonly="readonly"/>-
+      <input  name="timeb"  class="Wdate" type="text" onfocus="WdatePicker({minDate:'%y-%M-{%d}'})" style="width: 100px;margin: 5px;" readonly="readonly"/>
+      <if condition="$student.name neq ''"><{$student.name}><input type="hidden" name="stuid" value="<{$student.id}>"><elseif condition="$grade.id neq ''"/><{$grade.name}><input type="hidden" name="g" value="<{$grade.id}>"><else/>
+      <select class="xuan" id="xuan">
+      <option value="4">全部</option>
+      <option value="0">学员：</option>
+      <option value="1">班级：</option>
+      <option value="2">试听：</option>
+      <!-- <option value="3">讲师：</option> -->
+      </select>
+      </if></h2>
+    </div><a href="#" id="quanA">全选</a>/<a href="#" id="quanB">全取消</a><input type="button" value="查询" id="search" class="inp"><hr/>
+<div id="tishi2" class="tishi2" align="center"></div>
+<div></div>
+        <div style="text-align: right;"><input type="submit" name="sub1" value="确认选中的排课"><input type="submit" name="sub2" value="删除选中的排课"></div><hr/>
+</div>
+</form>

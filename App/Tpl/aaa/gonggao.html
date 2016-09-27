@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>校区排课系统</title>
+    <link rel="stylesheet" type="text/css" href="../Public/aaa/css/style.css">
+</head>
+
+</head>
+<body  style="margin-left:200px;">
+<div class="left-gg">
+     <ul>
+         <li><a href="__URL__/sc_ad" class="current"><em class="gg"></em>校区公告</a></li>
+         <li><a href="__URL__/sc_teacher"><em class="js"></em>讲师管理</a></li>
+         <li><a href="__URL__/ban_rules"><em class="mm"></em>禁排规则</a></li>
+         <li><a href="__URL__/sc_set"><em class="mm"></em>密码修改</a></li>
+     </ul>
+</div>
+<div class="right-gg">
+     <div class="head-t">校区公告&nbsp;(&nbsp;该信息将显示在校区微信页面首页&nbsp;)</div>
+     <div class="main-zt">
+          <div class="placard"><span>鸿文所有老师，预祝全体学员在2015高考中能再创佳绩！</span></div>
+          <div class="message">
+            <form id="form1" name="form1" method="post" action="__URL__/sc_ad">
+              <textarea class="wzsr" name="ad" placeholder="公告内容" cols="30" rows="10"><{$st.ad}></textarea>
+              <p>在这里各校区可发布相关通知类信息，右侧仅参考！</p>
+              <input type="submit" value="更新公告" >
+            </form>
+          </div>
+     </div>
+</div>
+</body>
+</html>
+

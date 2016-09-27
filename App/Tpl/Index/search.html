@@ -1,0 +1,48 @@
+<script type="text/javascript" src="../Public/js/service.js"></script>
+<link href="../Public/css/qqkf.css" type="text/css" rel="stylesheet">
+<link href="../Public/css/style.css" type="text/css" rel="stylesheet">
+
+<!-- 排课查询助手 -->
+
+<div class="helper-button" style="position:fixed; width:42px;height:118px;right:6px;top:70px;z-index:10000; _position:absolute;_bottom:auto;" > <a href="#" onclick="return false;"></a> </div>
+<div class="helper-wrap show"  >
+  <div class="helper-box">
+    <div class="helper-box-tit">
+	  <ul class="tab_menu">
+	  	<li>
+	  		时间：<input  name="times"  type="text" class="Wdate"  style="width: 80px;" onclick="WdatePicker()" readonly="readonly" id="sdate" />
+	  	</li>
+	  	<li>
+	  		讲师：<input  name="teachers"  type="text"  style="width: 80px;" id="steacher" />
+	  	</li>
+
+	  </ul>
+	  <div class="helper-box-search"><input   name="button"  type="button"  style="width: 90px;height:30px;" value="查询" id="sbt" /></div>
+
+      <div class="helper-box-close"> <a onclick="return false;" title="关闭" > <i class="iconfont">&#223;</i> </a> </div>
+    </div>
+    <div class="helper-box-info">
+      <div style="width:60px;float:left;"><span style="font-size: 10pt;">【详情】 </span></div>
+      <a>“查看更多”功能设计中，暂时不支持使用……</a>
+    </div>
+
+    <div class="tab_box" id="affili">
+      <!--站长信息列表-->
+      <ul class="con" id="search">
+        <li>①</li>
+        <li>②</li>
+        <li>③</li>
+        <li>④</li>
+        <li>⑤</li>
+        <li>⑥</li>
+        <li>⑦</li>
+        <li>⑧</li>
+
+
+      </ul>
+      <div class="helper-box-bot">
+        <!--站长QQ客服-->
+         <a style="background:#54C5FD;" href="#">查看更多 </a> </div>
+    </div>
+  </div>
+</div>

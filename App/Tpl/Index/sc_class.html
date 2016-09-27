@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<link rel="stylesheet" type="text/css" href="../Public/css/my.css">
+<style type="text/css">
+.box {
+margin: 50px;
+background: burlywood;
+padding: 50px;
+}
+.box2 {
+margin: 10px;
+background: wheat;
+padding: 5px;
+width: 150px;
+float:left;
+}
+.table {
+float: left;
+width: 200px;
+}
+.in {
+margin-top: 20px;
+margin-left: 20px;
+padding: 5px;
+width: 100px;
+}
+td {
+padding: 8px;
+}
+.xz {
+width: 100px;
+float: left;
+background-color: tan;
+padding: 5px;
+margin-top: -5px;
+text-align: center;
+border-radius: 5px;
+}
+</style>
+</head>
+<body style="margin-left:200px;">
+<div class="menu">
+<ul style="padding-left: 0px;margin-top:12px;">
+    <li class="menu-list"><a href="__URL__/sc_ad">校区公告</a></li>
+    <li class="menu-list"><a href="__URL__/sc_teacher">讲师管理</a></li>
+    <li class="menu_current"><a href="__URL__/sc_class">小组管理</a></li>
+    <li class="menu-list"><a href="__URL__/sc_set">密码修改</a></li>
+</div>
+<div class="head"><div style="width: 200px;float: left;">管理小组</div><div class="xz"><a href="__URL__/sc_class">新增小组</a></div></div>
+<div style="height:100px"></div>
+
+<table width="1000" border="1" align="center">
+  <tr>
+    <th scope="row" width="150">小组名称</th>
+    <th>小组学员</th>
+    <th width="150">备注信息</th>
+    <th width="170">操作</th>
+  </tr>
+  <volist name="grade" id="g">
+  <tr>
+    <th scope="row"><{$g.name}></th>
+    <td><volist name='g.grade' id='v'><{$v.name}>，</volist></td>
+    <th><{$g.other}></th>
+    <td align="center"><button onclick="window.location.href= '__URL__/sc_class_change/gid/<{$g.id}>'">变更学员</button><button onclick="if(confirm( '同时删除所有没有完成的排课，确认删除吗？'))window.location.href= '__URL__/sc_class_del/gid/<{$g.id}>'">删除小组</button></td>
+  </tr>
+  </volist>
+</table>
+
+<div class="box">
+<form method="post" action="__URL__/sc_class_add">
+<h2>新增小组</h2>
+<br/>小组名称：<input type="text" name="name">备注：<input type="text" name="other"><input class="in" type="submit" value="保存" /><hr/>
+<br/>选择成员：<table><tr><td>
+		  <div style="width:100%;">
+		  <volist name='vo' id='vo'>
+			  <div class="box2">
+	             <input name="box[]" type="checkbox" class="xuan" value="<{$vo.id}>">&nbsp;&nbsp;&nbsp;&nbsp;<{$vo.p}><{$vo.name}>
+	          </div>
+	      </volist>
+          </div>
+          </td></tr></table>
+</form>
+</div>
+
+</body>
+</html>

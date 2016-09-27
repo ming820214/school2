@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<link rel="stylesheet" type="text/css" href="../Public/css/my.css">
+<style type="text/css">
+.box {
+margin-top: 100px;
+margin-left: 50px;
+margin-right: 50px;
+}
+.fo {
+	margin-left: 20px;
+	margin-right: 20px;
+	background-color: #FFCC99;
+	padding-top: 15px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+	padding-left: 15px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.bt {
+padding: 6px;
+background: chocolate;
+color: white;
+margin-left: 100px;
+}
+</style>
+</head>
+<body style="margin-left:200px;">
+<div class="menu">
+<ul style="padding-left: 0px;margin-top:12px;">
+    <li class="menu-list"><a href="__URL__/sc_ad">校区公告</a></li>
+    <li class="menu_current"><a href="__URL__/sc_teacher">讲师管理</a></li>
+    <li class="menu-list"><a href="__URL__/sc_class">小组管理</a></li>
+    <li class="menu-list"><a href="__URL__/sc_set">密码修改</a></li>
+</ul>
+</div>
+<div class="head">讲师管理</div>
+<div class="box">
+<table width="100%" border="1">
+  <tr>
+    <th width="14%" scope="col">语文</th>
+    <th width="14%" scope="col">数学</th>
+    <th width="14%" scope="col">英语</th>
+    <th width="14%" scope="col">物理</th>
+    <th width="14%" scope="col">化学</th>
+    <th width="14%" scope="col">生物</th>
+    <th width="14%" scope="col">文综</th>
+  </tr>
+  <tr>
+    <td><volist name='t1' id='t1'><p>&nbsp;&nbsp;<{$t1.name}>&nbsp;※&nbsp;<a href="__URL__/sc_delt/id/<{$t1.id}>">删除</a></p></volist></td>
+    <td><volist name='t2' id='t1'><p>&nbsp;&nbsp;<{$t1.name}>&nbsp;※&nbsp;<a href="__URL__/sc_delt/id/<{$t1.id}>">删除</a></p></volist></td>
+    <td><volist name='t3' id='t1'><p>&nbsp;&nbsp;<{$t1.name}>&nbsp;※&nbsp;<a href="__URL__/sc_delt/id/<{$t1.id}>">删除</a></p></volist></td>
+    <td><volist name='t4' id='t1'><p>&nbsp;&nbsp;<{$t1.name}>&nbsp;※&nbsp;<a href="__URL__/sc_delt/id/<{$t1.id}>">删除</a></p></volist></td>
+    <td><volist name='t5' id='t1'><p>&nbsp;&nbsp;<{$t1.name}>&nbsp;※&nbsp;<a href="__URL__/sc_delt/id/<{$t1.id}>">删除</a></p></volist></td>
+    <td><volist name='t6' id='t1'><p>&nbsp;&nbsp;<{$t1.name}>&nbsp;※&nbsp;<a href="__URL__/sc_delt/id/<{$t1.id}>">删除</a></p></volist></td>
+    <td><volist name='t7' id='t1'><p>&nbsp;&nbsp;<{$t1.name}>&nbsp;※&nbsp;<a href="__URL__/sc_delt/id/<{$t1.id}>">删除</a></p></volist></td>
+  </tr>
+</table>
+<form action="" method="post">
+<div class="fo">
+讲师姓名：<input type="text" name="name"/>
+主讲科目：
+    <select name="class" id="2class">
+      <option>语文</option>
+      <option>数学</option>
+      <option>英语</option>
+      <option>物理</option>
+      <option>化学</option>
+      <option>生物</option>
+      <option>文综</option>
+    </select>
+  <input class="bt" type="submit" name="add" value="新增保存"/>
+</div>
+</form>
+</div>
+</body>
+</html>

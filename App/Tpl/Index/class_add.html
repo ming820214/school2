@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../Public/css/common.css" type="text/css" />
+<script src="../Public/js/jquery.min.js"></script>
+<script src="../Public/js/jquery.timeselectsingle.js"></script>
+<script language="javascript" type="text/javascript" src="../Public/js/WdatePicker.js"></script>
+<link rel="stylesheet" type="text/css" href="../Public/time/jquery.datetimepicker.css"/>
+<script src="../Public/time/jquery.datetimepicker.js"></script>
+<script src="../Public/js/pdclass.js"></script>
+<link rel="stylesheet" type="text/css" href="../Public/css/my.css">
+<title>课表更新</title>
+
+<style type="text/css">
+<!--
+.STYLE1 {color: #000000}
+.bc {
+	height: 40px;
+	width: 120px;
+	color: #FFFFFF;
+	background-color: #663333;
+	font-weight: bold;
+	font-size: 18px;
+}
+.th1 {
+	height: 30px;
+	width: 100px;
+	font-size: 15px;
+	font-weight: bolder;
+	color: #FFFFFF;
+	font-family: "宋体";
+	text-decoration: blink;
+	background-color: #996600;
+}
+.xz {
+width: 100px;
+float: left;
+background-color: tan;
+padding: 5px;
+margin-top: -5px;
+text-align: center;
+border-radius: 5px;
+}
+-->
+</style>
+</head>
+
+<body style="margin-left:200px;">
+<div class="menu">
+<ul style="padding-left: 0px;margin-top:12px;">
+    <li class="menu-list"><a href="__URL__/classs">一对一排课</a></li>
+    <li class="menu-list"><a href="__URL__/classs_more">小组课排课</a></li>
+    <li class="menu_current"><a href="__URL__/class_add">试听课排课</a></li>
+</ul>
+</div>
+        <form action="__URL__/class_add" method="post" name="leavemsg" id="leavemsg">
+<div class="head"><div style="width: 200px;float: left;">试听课排课</div><div class="xz"><a href="__GROUP__/Class/student/sid/88888">试听课课表</a></div></div>
+<div id="man_zone" style="margin-top:70px">
+<div id="tishi" style="background:#3FCC33;color:#C90B0B;" align="center"></div>
+  <p>&nbsp;</p>
+  <table width="95%" border="0" align="center">
+                <tr>
+                  <td width="21%">
+                    <div align="center">选择时间：
+                      <input name="time"  type="text" class="Wdate" id="datetimepicker" style="width: 100px;" readonly="readonly" required="true" />
+                  </div></td>
+                  <td width="20%"><div align="center">
+                    学员姓名：
+                    <input name="name" type="text" id="name" size="10" required="true" />
+                  </div></td>
+                  <td width="32%"><p align="center">时间：
+                    <input name="time1"  type="text"  class="timeSelectSingle" id="1time1" size="5" readonly="readonly"/>
+                    -
+  <input name="time2"  type="text"  class="timeSelectSingle" id="1time2" size="5" readonly="readonly"/>
+                    </p>
+</td>
+                  <td width="35%"><div align="center">
+                  <p align="center">科目：
+                      <select name="class" id="1class">
+                      <option selected="selected">科目</option>
+                      <option>语文</option>
+                      <option>数学</option>
+                      <option>英语</option>
+                      <option>物理</option>
+                      <option>化学</option>
+                      <option>生物</option>
+                      <option>政治</option>
+                      <option>历史</option>
+                      <option>地理</option>
+                      </select>
+                    讲师：<select name="teacher" id="1teacher"></select>
+                    </p>
+                  </div></td>
+      </tr>
+    </table>
+  <div align="center">
+    <p>
+      <input name="subt" type="submit" class="bc" value="添加课程" onclick="return pclass()" />
+    </p>
+  </div>
+</div>
+
+</form>
+<include file="search" />
+</body>
+<script>
+$('#datetimepicker').datetimepicker({
+	lang:'ch',
+	timepicker:false,
+	format:'Y-m-d',
+	formatDate:'Y-m-d',
+	minDate:'-1970/01/02',
+});
+</script>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../Public/css/common.css" type="text/css" />
+<script src="../Public/js/jquery.min.js"></script>
+<script src="../Public/js/jquery.timeselectsingle.js"></script>
+<script language="javascript" type="text/javascript" src="../Public/js/WdatePicker.js"></script>
+<link rel="stylesheet" type="text/css" href="../Public/time/jquery.datetimepicker.css"/>
+<script src="../Public/time/jquery.js"></script>
+<script src="../Public/time/jquery.datetimepicker.js"></script>
+<link rel="stylesheet" type="text/css" href="../Public/css/my.css">
+<title>课时更新</title>
+
+
+
+<style type="text/css">
+<!--
+.STYLE1 {color: #FF0000}
+.bc {
+height: 40px;
+width: 120px;
+color: white;
+background-color: #633;
+font-weight: bold;
+font-size: 18px;
+}
+.bc:hover {
+height: 40px;
+width: 120px;
+color: #FF9999
+background-color: #633;
+font-weight: bold;
+font-size: 18px;
+}
+-->
+</style>
+</head>
+
+<body style="margin-left:200px;">
+<div class="menu">
+<ul style="padding-left: 0px;margin-top:12px;">
+    <li class="menu_current"><a href="__URL__/course">课时管理</a></li>
+    <li class="menu-list"><a href="__URL__/course_search">消耗记录</a></li>
+</ul>
+</div>
+<div class="head">学员课时更新</div>
+<div style="height:60px;"></div>
+<div id="man_zone">
+
+			  <table width="99%" border="0" align="center"  cellpadding="3" cellspacing="1" class="table_style">
+				<tr>
+				  <td width="13%" class="left_title_1"><span class="left-title">学员姓名:</span></td>
+				  <td colspan="2"><{$vo.name}>
+			      </td>
+				</tr>
+				<tr>
+				  <td class="left_title_2">家人电话:</td>
+				  <td colspan="2"><{$vo.tel}></td>
+				</tr>
+<form action="__URL__/course_info?id=<{$vo.id}>" method="post" name="leavemsg" id="leavemsg">
+				<tr>
+				  <td class="left_title_1">总课时：<input name="id" type="hidden" value="<{$vo.id}>" /></td>
+				  <td width="79%"><p> &nbsp;&nbsp;&nbsp;截至:<span class="STYLE1">&nbsp;&nbsp;&nbsp;
+				    <input name="time" type="text" id="datetimepicker" value="<{$cs.lasttime}>"/>
+
+			      &nbsp;&nbsp;</span>总课时：
+				      <input name="course" type="text" id="course" onChange="value=value.replace(/[^-?\d]/g,'')" value="<{$cs.course}>" size="5" maxlength="10" required="true" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^-?\d]/g,''))" />
+				     课时
+			        &nbsp;&nbsp;&nbsp;&nbsp;（所剩课时总和,只能输入整数，一节课=2小时，1小时=一课时，不足1小时的可以写在备注里。）
+</p>
+			      </td>
+				</tr>
+				<tr>
+
+				  <td height="119" colspan="2" class="left_title_2"><p>&nbsp;</p>
+				  <table width="95%" border="0" align="center">
+                    <tr>
+                      <td><div align="center">语文：
+                        <input name="aa" type="text"  onChange="value=value.replace(/[^-?\d]/g,'')" value="<{$cs.a}>" size="5" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^-?\d]/g,''))" />
+                      课时</div></td>
+                      <td><div align="center">数学：
+                        <input name="b" type="text" id="b" size="5"  onChange="value=value.replace(/[^-?\d]/g,'')"  value="<{$cs.b}>" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^-?\d]/g,''))"/>
+                      课时</div></td>
+                      <td><div align="center">英语：
+                        <input name="c" type="text" id="c" size="5" onChange="value=value.replace(/[^-?\d]/g,'')"  value="<{$cs.c}>" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^-?\d]/g,''))"/>
+                      课时</div></td>
+                      <td><div align="center">物理：
+                        <input name="d" type="text" id="d" size="5"  onChange="value=value.replace(/[^-?\d]/g,'')"  value="<{$cs.d}>" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^-?\d]/g,''))"/>
+                      课时</div></td>
+                      <td><div align="center">化学：
+                        <input name="e" type="text" id="e" size="5"  onChange="value=value.replace(/[^-?\d]/g,'')"  value="<{$cs.e}>" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^-?\d]/g,''))"/>
+                      课时</div></td>
+                    </tr>
+                    <tr>
+                      <td><div align="center">生物：
+                        <input name="f" type="text" id="f" size="5"  onChange="value=value.replace(/[^-?\d]/g,'')"  value="<{$cs.f}>" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^-?\d]/g,''))"/>
+                      课时</div></td>
+                      <td><div align="center">政治：
+                        <input name="g" type="text" id="g" size="5"  onChange="value=value.replace(/[^-?\d]/g,'')"  value="<{$cs.g}>" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^-?\d]/g,''))"/>
+                      课时</div></td>
+                      <td><div align="center">历史：
+                        <input name="h" type="text" id="h" size="5"  onChange="value=value.replace(/[^-?\d]/g,'')"  value="<{$cs.h}>" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^-?\d]/g,''))"/>
+                        课时</div></td>
+                      <td><div align="center">地理：
+                        <input name="i" type="text" id="i" size="5"  onChange="value=value.replace(/[^-?\d]/g,'')"  value="<{$cs.i}>" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^-?\d]/g,''))"/>
+                      课时</div></td>
+                      <td><div align="center"></div></td>
+                    </tr>
+                    <tr>
+                    	<td>课时备注：</td>
+                    	<td colspan="4" align="center"><div style="margin: 20px;"><textarea name="other" cols="70%" rows="2" wrap="virtual" style="height: 20px; width: 300px; float:left;"><{$cs.other}></textarea>可以备注分别说明一对一、以及一对多的具体课时数</div></td>
+                    </tr>
+                  </table>
+				    <p>&nbsp;</p>
+				    <div align="center">
+                      <input name="submit" type="submit" class="bc" value="修改课时"  onclick="return check_course()"/>
+                    </div>
+                 </form></td></tr>
+  </table>
+					
+</div>
+
+</body>
+
+
+<script>
+
+
+$('#datetimepicker').datetimepicker({
+	lang:'ch',
+	format:'Y-m-d H:i:00',
+	formatDate:'Y-m-d H:i:00',
+	minDate:'-1970/01/02',
+});
+
+</script>
+    <script type="text/javascript">
+	
+        function check_course() {
+		AAA=window.document.leavemsg.course.value;
+		a=window.document.leavemsg.aa.value;
+		b=window.document.leavemsg.b.value;
+		c=window.document.leavemsg.c.value;
+		d=window.document.leavemsg.d.value;
+		e=window.document.leavemsg.e.value;
+		f=window.document.leavemsg.f.value;
+		g=window.document.leavemsg.g.value;
+		h=window.document.leavemsg.h.value;
+		i=window.document.leavemsg.i.value;
+		aa=parseInt(a);
+		bb=parseInt(b);
+		cc=parseInt(c);
+		dd=parseInt(d);
+		ee=parseInt(e);
+		ff=parseInt(f);
+		gg=parseInt(g);
+		hh=parseInt(h);
+		ii=parseInt(i);
+		AAAA=parseInt(AAA);
+		var A=aa+bb+cc+dd+ee+ff+gg+hh+ii;
+            if ( A <= AAAA) {
+                return true;
+            }else{
+                alert("课时相加不能大于总课时数，请重新核对！");
+                return false;
+			}
+        }
+    </script>
+</html>

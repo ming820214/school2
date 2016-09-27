@@ -1,0 +1,79 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>无标题</title>
+</head>
+<style type="text/css">
+body{
+background-color: #F38B50;
+margin: 0;
+font-size: 12px;
+}
+.log{
+margin-top: 200px;
+padding-top: 30px;
+padding-bottom: 10px;
+padding-left: 40px;
+padding-right: 40px;
+background-color: #A27F56;
+}
+.button {
+width: 250px;
+height: 35px;
+margin-top: 20px;
+background-color: brown;
+border-radius: 10px;
+color: white;
+}
+.button:hover{
+background-color: #37B93C;
+color: white;
+}
+input {
+height: 26px;
+margin-top: 5px;
+}
+.in{
+width: 100px;
+margin-right: 10px;
+}
+.tite {
+margin-top: 50px;
+font-size: 30px;
+color: beige;
+font-weight: bolder;
+margin-left: 70px;
+float: left;
+margin-bottom: 50px;
+
+}
+</style>
+<body>
+<div><img src="../Public/images/login1.png"style="width: 100%;background-color: #6F3E00;"></div>
+<div class="log">
+
+<div class="tite">校区排课管理系统 v3.0</div>
+    	<form action="<{:U("Login/doLogin")}>" method="post" id="login_form">
+        <table align="center">
+        	<tr>
+            	<td >用户名 ：</td>
+                <td ><input type="text" name="username"/></td>
+            </tr>
+            <tr>
+            	<td>密码：</td>
+                <td ><input type="password" name="password"/></td>
+            </tr>
+			<tr >
+            	<td>验证码：</td>
+                <td><input type='text' name='code' class="in" /><img src='<{:U("Public/code")}>' onclick="this.src=this.src+'?'+Math.random()" style="vertical-align: bottom;"/></td>
+			</tr>
+            <tr>
+            	<td colspan="2" ><input type="submit"  class="button" value="登录" /></td>
+            </tr>
+        </table>
+		</form>
+
+</div>
+<div style="margin-left: 110px;padding-top: 10px;color: brown;">鸿文教育,2014版权所有</div>
+</body>
+</html>

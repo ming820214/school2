@@ -1,0 +1,105 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../Public/css/my.css">
+<style type="text/css">
+<!--
+.STYLE1 {font-size: 12px}
+.STYLE4 {
+	font-size: 12px;
+	color: #1F4A65;
+	font-weight: bold;
+}
+
+a:link {
+	font-size: 12px;
+	color: #06482a;
+	text-decoration: none;
+
+}
+a:visited {
+	font-size: 12px;
+	color: #06482a;
+	text-decoration: none;
+}
+a:hover {
+	font-size: 12px;
+	color: #FF0000;
+	text-decoration: underline;
+}
+a:active {
+	font-size: 12px;
+	color: #FF0000;
+	text-decoration: none;
+}
+.STYLE5 {color: #FFFFFF}
+.STYLE7 {font-size: 12px; color: #F0F0F0; }
+.STYLE9 {font-size: 14}
+.STYLE10 {color: #FFFF00}
+.STYLE11 {font-size: 18px}
+
+-->
+</style>
+</head>
+<body style="margin-left:200px;">
+<div class="menu">
+<ul style="padding-left: 0px;margin-top:12px;">
+    <li class="menu_current"><a href="__URL__/classs">一对一排课</a></li>
+    <li class="menu-list"><a href="__URL__/classs_more">小组课排课</a></li>
+    <li class="menu-list"><a href="__URL__/class_add">试听课排课</a></li>
+</ul>
+</div>
+<br/>
+<div class="head">学员信息,课时管理，建议利用学员搜索方式查找定位学员。</div>
+<div style="height:60px"></div>
+
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="30">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="15" height="30"><img src="../Public/images/tab_03.gif" width="15" height="30" /></td>
+        <td background="../Public/images/tab_05.gif"><img src="../Public/images/311.gif" width="16" height="16" /> <span class="STYLE4"> 校区所有学员剩余课时列表</span></td>
+        <td width="14"><img src="../Public/images/tab_07.gif" width="14" height="30" /></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="9" background="../Public/images/tab_12.gif">&nbsp;</td>
+        <td bgcolor="e5f1d6"><table width="50%" border="0" align="left" cellpadding="0" cellspacing="1" bgcolor="#CECECE">
+          <tr>
+            <td width="39%" height="25" background="../Public/images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1 STYLE5">姓名</div></td>
+            <td width="61%" height="25" background="../Public/images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE5">排课管理</div></td>
+          </tr>
+		
+		<php>
+		$count=0;   </php>
+		<volist name='st' id='vo'>
+       <tr>
+       <td height="20" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1"><{$vo.name}></div></td>
+       <td height="20" bgcolor="#FFFFFF"><div align="center"><img src="../Public/images/037.gif" width="9" height="9" /><span class="STYLE1"> [</span><a href="__URL__/class_up?id=<{$vo.id}>">排课</a><span class="STYLE1">]</span></div></td> 
+		<php>
+		$count++;		</php>		
+    </volist>
+        </table></td>
+        <td width="9" background="../Public/images/tab_16.gif">&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="29"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="15" height="29"><img src="../Public/images/tab_20.gif" width="15" height="29" /></td>
+        <td background="../Public/images/tab_21.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="40%"><div align="left"><span class="STYLE1">当前共<php> echo $count; </php>名学员信息</span></div></td>
+            <td width="60%" class="STYLE1">&nbsp;</td>
+          </tr>
+        </table></td>
+        <td width="14"><img src="../Public/images/tab_22.gif" width="14" height="29" /></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</body>

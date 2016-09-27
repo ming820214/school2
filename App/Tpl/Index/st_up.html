@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../Public/css/common.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="../Public/css/my.css">
+<title>信息修改</title>
+    <script type="text/javascript">
+        function check_message() {
+            if (window.document.leavemsg.name.value == "") {
+                alert("请填写学员姓名");
+                document.leavemsg.name.focus();
+                return false;
+            }
+            if (document.leavemsg.tel.value == "") {
+                alert("请填写家人联系电话.");
+                document.leavemsg.tel.focus();
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+        <form action="__URL__/st_up?id=<{$st.id}>" method="post" name="leavemsg" id="leavemsg">
+<div class="head">学员信息修改</div>
+<div style="height:60px"></div>
+<div id="man_zone">
+
+			  <table width="90%" border="0" align="center"  cellpadding="3" cellspacing="1" class="table_style">
+				<tr>
+				  <td width="18%" class="left_title_1"><span class="left-title">学员姓名:</span></td>
+				  <td colspan="2"><input name="name" value="<{$st["name"]}>" type="text" maxlength="16" /></td>
+				</tr>
+				<tr>
+				  <td class="left_title_2">家人电话:</td>
+				  <td colspan="2"><input name="tel" value="<{$st.tel}>" type="text" maxlength="16" />
+				    &nbsp;&nbsp;特别注意：所有学员之间联系电话不能重复，否则会保存失败！</td>
+				</tr>
+				<tr>
+				  <td class="left_title_1">微信绑定密码:</td>
+				  <td colspan="2"><input name="pw" value="<{$st.pw}>" type="text" maxlength="16" />建议设置不多于5位的数字或字母，例如：大连校区可以设置成“DL001、DL002……等”</td>
+				</tr>
+				<tr>
+				  <td class="left_title_2">学管师:</td>
+				  <td colspan="2"><input name="xueguan" type="text" id="xueguan" value="<{$st.xueguan}>" maxlength="5" /></td>
+				</tr>
+<tr>
+				  <td class="left_title_1">教学主任：</td>
+				  <td colspan="2"><input name="jiaoxue" type="text" id="jiaoxue" value="<{$st.jiaoxue}>" maxlength="5" /></td>
+				</tr>
+				<tr>
+				  <td class="left_title_2">备注信息:</td>
+				  <td colspan="2"><textarea name="other"  cols="70%" rows="6"  wrap="virtual"><{$st.other}></textarea></td>
+				</tr>
+				<tr>
+				  <td colspan="2" class="left_title_2"><div align="center">
+                    <input name="submit2" type="submit" value="提交修改" onclick="return check_message()" />
+                                    </div></td>
+				  <td width="52%"><div align="center"><a href="__URL__/st_del?id=<{$st.id}>"><strong>删除该学员信息</strong></a></div></td>
+				</tr>
+			  </table>
+<input name="id" type="hidden" value="<{$st.id}>">
+</div>
+        </form>
+
+</body>
+</html>

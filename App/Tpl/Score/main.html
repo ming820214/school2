@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<style type="text/css">
+<!--
+.STYLE1 {color: #FFFFFF}
+-->
+</style>
+</head>
+
+<body>
+<table width="984" border="0" align="center">
+  <tr bgcolor="#666666">
+    <td width="170" height="30"><div align="center" class="STYLE1">      学员姓名</div></td>
+    <td width="131" height="30"><div align="center" class="STYLE1">      积 分</div></td>
+    <td width="315" height="30"><div align="center" class="STYLE1"> 积分变更事由</div></td>
+    <td width="157" height="30"><div align="center" class="STYLE1"> 审核中的积分</div></td>
+    <td width="117" height="30"><div align="center" class="STYLE1"> 审核状态</div></td>
+    <td width="68"><div align="center" class="STYLE1"> 修改</div></td>
+  </tr>
+</table>
+<table width="984" border="1" align="center" bordercolor="#CCCCCC">
+  <volist name='score' id='cls'>
+  <tr>
+    <td width="166"><div align="center"><{$cls.name}></div></td>
+    <td width="130"><div align="center"><{$cls.score}></div></td>
+
+<php>
+  $info='';
+  $info=$cls['stid'];
+
+</php>
+
+    <td width="314"><div align="center"><php>echo $info['info'];</php></div></td>
+    <td width="156"><div align="center"><php>echo $info['leftt'];</php></div></td>
+    <td width="114"><div align="center">
+
+
+<if condition="($info['state'] eq 0) ">
+<elseif condition="$info['state'] egt 1"/>积分审核中
+<else />
+</if>
+
+
+    </div></td>
+
+
+    <td width="64"><div align="center"><a href="__URL__/updat/id/<{$cls.id}>">编辑</a></div></td>
+  </tr>
+  </volist>
+</table>
+</body>
+
+</html>

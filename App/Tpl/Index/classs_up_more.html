@@ -1,0 +1,349 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../Public/css/common.css" type="text/css" />
+<script src="../Public/js/jquery.min.js"></script>
+<script src="../Public/js/jquery.timeselectsingle.js"></script>
+<link rel="stylesheet" type="text/css" href="../Public/time/jquery.datetimepicker.css"/>
+<script src="../Public/time/jquery.js"></script>
+<script src="../Public/time/jquery.datetimepicker.js"></script>
+<script language="javascript" type="text/javascript" src="../Public/js/WdatePicker.js"></script>
+<link href="../Public/js/skin/WdatePicker.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../Public/css/my.css">
+<script src="../Public/js/pdclass.js"></script>
+
+<title>课表更新</title>
+
+<style type="text/css">
+<!--
+.bc {
+	height: 40px;
+	width: 120px;
+	color: #FFFFFF;
+	background-color: #663333;
+	font-weight: bold;
+	font-size: 18px;
+}
+.bc:hover{
+	height: 40px;
+	width: 120px;
+	color:#3399CC;
+	background-color: #663333;
+	font-weight: bold;
+	font-size: 18px;
+}
+.th1 {
+	height: 30px;
+	width: 100px;
+	font-size: 15px;
+	font-weight: bolder;
+	color: #FFFFFF;
+	font-family: "宋体";
+	text-decoration: blink;
+	background-color: #996600;
+}
+.STYLE2 {color: #FFFFFF}
+-->
+</style>
+<script type="text/javascript">
+$(document).ready(function() {
+  $("#bt1").click(function(){
+    $("#tb1").hide();
+    $("#bt11").hide();
+    $("#tb2").show("slow");
+    $("#bt22").show("slow");
+  });
+  $("#bt2").click(function(){
+    $("#tb2").hide();
+    $("#bt22").hide();
+    $("#tb1").show("slow");
+    $("#bt11").show("slow");
+  });
+});
+</script>
+</head>
+<body style="margin-left:200px;">
+<div class="menu">
+<ul style="padding-left: 0px;margin-top:12px;">
+    <li class="menu-list"><a href="__URL__/classs">一对一排课</a></li>
+    <li class="menu_current"><a href="__URL__/classs_more">小组课排课</a></li>
+    <li class="menu-list"><a href="__URL__/class_add">试听课排课</a></li>
+</ul>
+</div>
+<form action="__URL__/classs_up_more" method="post" name="leavemsg" id="leavemsg">
+<div class="head">小组排课：
+  <volist name='vo' id='vo1'>
+      <{$vo1.name}>、 <input name="box[]" type="hidden" value="<{$vo1.id}>" /> 
+      </volist>添加课程。<input name="grade" type="hidden" value="<{$grade}>"/>
+</div>
+<div style="height:60px;"></div>
+<div id="tishi" style="background:#3FCC33;color:#C90B0B;font-size:15px;margin-top:10px;" align="center"></div>
+<div id="man_zone">
+  <table width="95%" height="150" border="0" align="center" id="tb1">
+                <tr>
+                  <td width="13%" rowspan="3"><label>
+                      <div align="center">
+                        <p><strong>选择时间：</strong></p>
+                        <input  name="time"  type="text" class="Wdate" id="datetimepicker" style="width: 100px;" readonly="readonly"/>
+                    </div>                  </td>
+                  <td width="43%"><p align="center">①时间：
+                <input onChange="value=value.replace(/[^:?\d]/g,'')" name="1time1"  type="text"  class="timeSelectSingle" id="1time1" size="3" readonly="readonly"/>
+                      -
+                <input onChange="value=value.replace(/[^:?\d]/g,'')" name="1time2"  type="text"  class="timeSelectSingle" id="1time2" size="3" readonly="readonly"/>
+                
+                      科目：
+                      <select name="1class" id="1class">
+                        <option selected="selected">科目</option>
+                        <option>语文</option>
+                        <option>数学</option>
+                        <option>英语</option>
+                        <option>物理</option>
+                        <option>化学</option>
+                        <option>生物</option>
+                        <option>政治</option>
+                        <option>历史</option>
+                        <option>地理</option>
+                    </select>
+                    讲师：<select name="1teacher" id="1teacher"></select>
+                  </p></td>
+                  <td width="44%"><p align="center">②时间：
+                    <input onChange="value=value.replace(/[^:?\d]/g,'')" name="2time1"  type="text"  class="timeSelectSingle" id="2time1" size="3" readonly="readonly"/>
+                    -
+                    <input onChange="value=value.replace(/[^:?\d]/g,'')" name="2time2"  type="text"  class="timeSelectSingle" id="2time2" size="3" readonly="readonly"/>
+                    科目：
+                    <select name="2class" id="2class">
+                      <option selected="selected">科目</option>
+                      <option>语文</option>
+                      <option>数学</option>
+                      <option>英语</option>
+                      <option>物理</option>
+                      <option>化学</option>
+                      <option>生物</option>
+                      <option>政治</option>
+                      <option>历史</option>
+                      <option>地理</option>
+                    </select>
+                    讲师：<select name="2teacher" id="2teacher"></select>
+                  </p></td>
+      </tr>
+                <tr>
+                  <td><p align="center">③时间：
+                    <input onChange="value=value.replace(/[^:?\d]/g,'')" name="3time1"  type="text"  class="timeSelectSingle" id="3time1" size="3" readonly="readonly"/>
+                    -
+                    <input onChange="value=value.replace(/[^:?\d]/g,'')" name="3time2"  type="text"  class="timeSelectSingle" id="3time2" size="3" readonly="readonly"/>
+                    
+                    科目：
+                    <select name="3class" id="3class">
+                      <option selected="selected">科目</option>
+                      <option>语文</option>
+                      <option>数学</option>
+                      <option>英语</option>
+                      <option>物理</option>
+                      <option>化学</option>
+                      <option>生物</option>
+                      <option>政治</option>
+                      <option>历史</option>
+                      <option>地理</option>
+                    </select>
+                    讲师：<select name="3teacher" id="3teacher"></select>
+                  </p></td>
+                  <td><p align="center">④时间：
+                    <input onChange="value=value.replace(/[^:?\d]/g,'')" name="4time1"  type="text"  class="timeSelectSingle" id="4time1" size="3" readonly="readonly"/>
+                    -
+                    <input onChange="value=value.replace(/[^:?\d]/g,'')" name="4time2"  type="text"  class="timeSelectSingle" id="4time2" size="3" readonly="readonly"/>
+                    
+                    科目：
+                    <select name="4class" id="4class">
+                      <option selected="selected">科目</option>
+                      <option>语文</option>
+                      <option>数学</option>
+                      <option>英语</option>
+                      <option>物理</option>
+                      <option>化学</option>
+                      <option>生物</option>
+                      <option>政治</option>
+                      <option>历史</option>
+                      <option>地理</option>
+                    </select>
+                    讲师：<select name="4teacher" id="4teacher"></select>
+                  </p></td>
+      </tr>
+                <tr>
+                  <td height="46"><p align="center">⑤时间：
+                    <input onChange="value=value.replace(/[^:?\d]/g,'')" name="5time1"  type="text"  class="timeSelectSingle" id="5time1" size="3" readonly="readonly"/>
+                    -
+                    <input onChange="value=value.replace(/[^:?\d]/g,'')" name="5time2"  type="text"  class="timeSelectSingle" id="5time2" size="3" readonly="readonly"/>
+                    
+                    科目：
+                    <select name="5class" id="5class">
+                      <option selected="selected">科目</option>
+                      <option>语文</option>
+                      <option>数学</option>
+                      <option>英语</option>
+                      <option>物理</option>
+                      <option>化学</option>
+                      <option>生物</option>
+                      <option>政治</option>
+                      <option>历史</option>
+                      <option>地理</option>
+                    </select>
+                    讲师：<select name="5teacher" id="5teacher"></select>
+                  </p></td>
+                  <td><p align="center">⑥时间：
+                    <input onChange="value=value.replace(/[^:?\d]/g,'')" name="6time1"  type="text"  class="timeSelectSingle" id="6time1" size="3" readonly="readonly"/>
+                    -
+                    <input onChange="value=value.replace(/[^:?\d]/g,'')" name="6time2"  type="text"  class="timeSelectSingle" id="6time2" size="3" readonly="readonly"/>
+                    
+                    科目：
+                    <select name="6class" id="6class">
+                      <option selected="selected">科目</option>
+                      <option>语文</option>
+                      <option>数学</option>
+                      <option>英语</option>
+                      <option>物理</option>
+                      <option>化学</option>
+                      <option>生物</option>
+                      <option>政治</option>
+                      <option>历史</option>
+                      <option>地理</option>
+                    </select>
+                    讲师：<select name="6teacher" id="6teacher"></select>
+                  </p></td>
+      </tr>
+    </table>
+  <table width="90%" border="0" align="center" id="bt11">
+    <tr>
+      <td><div align="center">
+          <input name="sub1" type="submit" class="bc" id="sub1" onclick="return pdclass()" value="保存并继续" />
+      </div></td>
+      <td><div align="center">
+          <input name="submi2" type="button" class="bc" value="星期排课" id="bt1" />
+      </div></td>
+    </tr>
+  </table>
+  <table width="95%" height="150" border="0" align="center" id="tb2" style="display: none">
+    <tr>
+      <td width="13%" ><label>
+          <div align="center">
+            <select name="week" id="week">
+              <option value="1">星期一</option>
+              <option value="2">星期二</option>
+              <option value="3">星期三</option>
+              <option value="4">星期四</option>
+              <option value="5">星期五</option>
+              <option value="6">星期六</option>
+              <option value="7">星期日</option>
+            </select>
+          </div>          </td>
+      <td width="43%"><p align="center">①时间：
+        <input onchange="value=value.replace(/[^:?\d]/g,'')" name="7time1"  type="text"  class="timeSelectSingle" id="7time1" size="3" readonly="readonly"/>
+        -
+        <input onchange="value=value.replace(/[^:?\d]/g,'')" name="7time2"  type="text"  class="timeSelectSingle" id="7time2" size="3" readonly="readonly"/>
+        科目：
+        <select name="7class" id="7class">
+          <option selected="selected">科目</option>
+          <option>语文</option>
+          <option>数学</option>
+          <option>英语</option>
+          <option>物理</option>
+          <option>化学</option>
+          <option>生物</option>
+          <option>政治</option>
+          <option>历史</option>
+          <option>地理</option>
+        </select>
+      讲师：<select name="7teacher" id="7teacher"></select>
+      </p></td>
+      <td width="44%"><p align="center">②时间：
+        <input onchange="value=value.replace(/[^:?\d]/g,'')" name="8time1"  type="text"  class="timeSelectSingle" id="8time1" size="3" readonly="readonly"/>
+        -
+        <input onchange="value=value.replace(/[^:?\d]/g,'')" name="8time2"  type="text"  class="timeSelectSingle" id="8time2" size="3" readonly="readonly"/>
+        科目：
+        <select name="8class" id="8class">
+          <option selected="selected">科目</option>
+          <option>语文</option>
+          <option>数学</option>
+          <option>英语</option>
+          <option>物理</option>
+          <option>化学</option>
+          <option>生物</option>
+          <option>政治</option>
+          <option>历史</option>
+          <option>地理</option>
+        </select>
+      讲师：<select name="8teacher" id="8teacher"></select>
+      </p></td>
+    </tr>
+    <tr>
+	<td><div align="center">
+        <p><strong>连续添加 </strong>
+          <input name="i" id="i" type="text"  onchange="value=value.replace(/[^?\d]/g,'')" size="2" maxlength="2" style="width:20px;"/> 
+          周</p>
+	    </div></td>
+      <td><p align="center">③时间：
+        <input onchange="value=value.replace(/[^:?\d]/g,'')" name="9time1"  type="text"  class="timeSelectSingle" id="9time1" size="3" readonly="readonly"/>
+        -
+        <input onchange="value=value.replace(/[^:?\d]/g,'')" name="9time2"  type="text"  class="timeSelectSingle" id="9time2" size="3" readonly="readonly"/>
+        科目：
+        <select name="9class" id="9class">
+          <option selected="selected">科目</option>
+          <option>语文</option>
+          <option>数学</option>
+          <option>英语</option>
+          <option>物理</option>
+          <option>化学</option>
+          <option>生物</option>
+          <option>政治</option>
+          <option>历史</option>
+          <option>地理</option>
+        </select>
+      讲师：<select name="9teacher" id="9teacher"></select>
+      </p></td>
+      <td><p align="center">④时间：
+        <input onchange="value=value.replace(/[^:?\d]/g,'')" name="10time1"  type="text"  class="timeSelectSingle" id="10time1" size="3" readonly="readonly"/>
+        -
+        <input onchange="value=value.replace(/[^:?\d]/g,'')" name="10time2"  type="text"  class="timeSelectSingle" id="10time2" size="3" readonly="readonly"/>
+        科目：
+        <select name="10class" id="10class">
+          <option selected="selected">科目</option>
+          <option>语文</option>
+          <option>数学</option>
+          <option>英语</option>
+          <option>物理</option>
+          <option>化学</option>
+          <option>生物</option>
+          <option>政治</option>
+          <option>历史</option>
+          <option>地理</option>
+        </select>
+      讲师：<select name="10teacher" id="10teacher"></select>
+      </p></td>
+    </tr>
+  </table>
+  <div align="center">
+    <table width="90%" border="0" align="center" id="bt22" style="display: none">
+      <tr>
+        <td><div align="center">
+          <input name="sub2" type="submit" class="bc" id="sub2" value="保存" onclick="return pdclass()"/>
+        </div></td>
+        <td><div align="center">
+          <input name="submi" type="button" class="bc" value="日期排课" id="bt2" />
+        </div></td>
+      </tr>
+    </table><h2><{$ts}></h2>
+  </div>
+</div>
+</form>
+<include file="search" />
+</body>
+<script>
+$('#datetimepicker').datetimepicker({
+	lang:'ch',
+	timepicker:false,
+	format:'Y-m-d',
+	formatDate:'Y-m-d',
+	minDate:'-1970/01/02',
+});
+</script>
+</html>

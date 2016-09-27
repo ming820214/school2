@@ -1,0 +1,124 @@
+/*底部导航样式*/
+.foot {
+width: 100%;
+margin: 0;
+position: fixed;
+bottom: 0px;
+}
+.foot ul li a, .foot ul li a:visited {display:block; text-decoration:none; width:100px; height:25px; text-align:left; color:#000; padding-left:10px; border:1px solid #fff; border-width:0 1px 1px 0; background:#c9c9a7; line-height:25px; font-size:11px;}
+.foot ul {padding:0; margin:0;list-style-type: none; }
+.foot ul li {float:right; position:relative;}
+.foot ul li ul {display: none;}
+/* specific to non IE browsers */
+.foot ul li:hover a {color:#000; background:#e9e9c7;}
+.foot ul li:hover ul {display:block; position:absolute; bottom:26px; left:0;}
+.foot ul li:hover ul li a.hide {background:#a7c9c9; color:#000;}
+.foot ul li:hover ul li {display:block; background:#fff; color:#000;width:100px; clear:both;}
+.foot ul li:hover ul li:hover a.hide {background:#dfc184; color:#000;}
+.foot ul li:hover ul li ul {display: none;}
+.foot ul li:hover ul li a {display:block; background:#c9a7c9; color:#000; width:100%; padding-left:10px;}
+.foot ul li:hover ul li a:hover {background:#dfc184; color:#000;}
+.foot ul li:hover ul li:hover ul {display:block; position:absolute; left:210px; bottom:0;}
+.foot ul li:hover ul li:hover ul li a {background:#dfc184; color:#000;}
+.foot ul li:hover ul li:hover ul li a:hover {background:#c9c9a7; color:#000;}
+.foot ul li:hover ul.left {left:-105px;}
+.foot ul li:hover ul li:hover ul.left {left:-210px; width:209px;}
+
+
+/*弹出层底部导航样式*/
+.boxfoot {
+width: 100%;
+margin: 0;
+/*position: fixed;*/
+bottom: 0px;
+}
+.boxfoot ul li a, .boxfoot ul li a:visited {display:block; text-decoration:none; width:70px; height:25px; text-align:left; color:#000; padding-left:10px; border:1px solid #fff; border-width:0 1px 1px 0; background:#c9c9a7; line-height:25px; font-size:11px;}
+.boxfoot ul {padding:0; margin:0;list-style-type: none; }
+.boxfoot ul li {float:right; position:relative;}
+.boxfoot ul li ul {display: none;}
+/* specific to non IE browsers */
+.boxfoot ul li:hover a {color:#000; background:#e9e9c7;}
+.boxfoot ul li:hover ul {display:block; position:absolute; bottom:26px; left:0;}
+.boxfoot ul li:hover ul li a.hide {background:#a7c9c9; color:#000;}
+.boxfoot ul li:hover ul li {display:block; background:#fff; color:#000;width:70px; clear:both;}
+.boxfoot ul li:hover ul li:hover a.hide {background:#dfc184; color:#000;}
+.boxfoot ul li:hover ul li ul {display: none;}
+.boxfoot ul li:hover ul li a {display:block; background:#c9a7c9; color:#000; width:100%; padding-left:10px;}
+.boxfoot ul li:hover ul li a:hover {background:#dfc184; color:#000;}
+.boxfoot ul li:hover ul li:hover ul {display:block; position:absolute; left:210px; bottom:0;}
+.boxfoot ul li:hover ul li:hover ul li a {background:#dfc184; color:#000;}
+.boxfoot ul li:hover ul li:hover ul li a:hover {background:#c9c9a7; color:#000;}
+.boxfoot ul li:hover ul.left {left:-105px;}
+.boxfoot ul li:hover ul li:hover ul.left {left:-210px; width:209px;}
+
+
+
+/*弹出层样式*/
+.reveal-modal-bg { position: fixed; height: 100%; width: 100%; z-index: 100; display: none; top: 0; left: 0;  }
+.reveal-modal { visibility: hidden; top: 200px; left: 50%; width: 850px; position: fixed; margin-left:-465px;margin-top:-180px;z-index: 101; padding: 30px 40px 34px; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; -moz-box-shadow: 0 0 10px rgba(0,0,0,.4); -webkit-box-shadow: 0 0 10px rgba(0,0,0,.4); -box-shadow: 0 0 10px rgba(0,0,0,.4); background-color: #FFF;    }
+.reveal-modal .close-reveal-modal { font-size: 22px; line-height: 0.5; position: absolute; top: 8px; right: 11px; color: #333; text-shadow: 0 -1px 1px rbga(0,0,0,.6); font-weight: bold; cursor: pointer;}
+
+.tishi{
+	background: #3FCC33;
+	color: rgb(143, 58, 1);
+	font-size: 15px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	height: 15px;
+	padding: 6px;
+}
+.tishi2{
+	background: #3FCC33;
+	color: rgb(143, 58, 1);
+	font-size: 15px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+    overflow-y: auto;
+    max-height: 250px;
+	text-align: left;
+	padding: 30px;
+	color: black;
+}
+.box{
+    overflow-y: auto;
+    max-height: 210px;
+}
+.over{
+    overflow-y: auto;
+    max-height: 110px;
+    background-color: beige;
+    margin-bottom: 3px;
+}
+.row {
+text-align: left;
+margin: 10px;
+margin-left: 30px;
+}
+.row2 {
+margin: 5px;
+}
+.font {
+font-size: 15px;
+font-weight: bolder;
+color: rgb(170, 9, 28);
+font-family: 楷体;
+}
+.xuan {
+height: 25px;
+font-size: 20px;
+color: royalblue;
+font-family: 楷体;
+margin-left: 20px;
+font-weight: bold;
+border-radius: 2px;
+}
+.in {
+width: 150px;
+border-radius: 3px;
+height: 25px;
+background-color: white;
+}
+.inp {
+margin-left: 600px;
+margin-top: -15px;
+}

@@ -1,0 +1,45 @@
+.in {
+width: 300px;
+background: rgb(223, 203, 203);
+height: 200px;
+float: left;
+margin-top: 100px;
+margin-left: 50px;
+}
+.inner {
+margin-left: 20px;
+width: 220px;
+background: bisque;
+height: 90px;
+border-radius: 10px;
+text-align: left;
+padding: 20px;
+}
+.cent {
+width: 300px;
+height: 450px;
+background: bisque;
+float: left;
+margin-left: 100px;
+margin-top: 50px;
+border-radius: 10px 40px;
+text-align: left;
+padding: 30px;
+}
+.right{
+width: 300px;
+height: 500px;
+float: left;
+margin-left: 50px;
+margin-top: 50px;
+}
+.right1 {
+background: rgb(218, 106, 106);
+border-radius: 10px 40px;
+text-align: left;
+padding: 30px;
+margin-bottom: 20px;
+}
+.right img{
+	float: left;
+}

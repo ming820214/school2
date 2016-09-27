@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="../Public/css/common.css" type="text/css" />
+<link rel="stylesheet" type="text/css" href="../Public/css/my.css">
+<title>信息</title>
+    <script type="text/javascript">
+        function check_message() {
+            if (window.document.leavemsg.name.value == "") {
+                alert("请填写学员姓名");
+                document.leavemsg.name.focus();
+                return false;
+            }
+            if (document.leavemsg.tel.value == "") {
+                alert("请填写家人联系电话.");
+                document.leavemsg.tel.focus();
+                return false;
+            }
+        }
+    </script>
+<style type="text/css">
+.head-a {
+float: left;
+}
+.head-b {
+float: left;
+margin-left: 500px;
+background: burlywood;
+width: 100px;
+padding: 5px;
+text-align: center;
+border-radius: 4px;
+}
+</style>
+</head>
+<body>
+<form action="__URL__/st_add" method="post" name="leavemsg" id="leavemsg">
+<div class="head">
+    <div class="head-a">学员信息添加</div>
+    <div class="head-b"><a href="__URL__/st">返回</a></div>
+</div>
+<div style="height:60px"></div>
+<div id="man_zone">
+
+			  <table width="90%" border="0" align="center"  cellpadding="3" cellspacing="1" class="table_style">
+				<tr>
+				  <td width="15%" class="left_title_1"><span class="left-title">学员姓名:</span></td>
+				  <td width="45%"><input name="name"  type="text" maxlength="16" /></td>
+				  <td width="10%" class="left_title_1"><!-- <span class="left-title">年级：</span> --></td>
+				  <td width="30%">
+<!-- 				  <select name="grade">
+				  	<optgroup label="初中">
+				  	<option>初一</option>
+				  	<option>初二</option>
+				  	<option>初三</option>
+				  	</optgroup>
+				  	<optgroup label="高中">
+				  	<option>高一</option>
+				  	<option>高二</option>
+				  	<option>高三</option>
+				  	</optgroup>
+				  </select>
+					<select name="wl">
+				  	<option>待定</option>
+				  	<option>文科</option>
+				  	<option>理科</option>
+				  	</select>				  
+ -->				  </td>
+				</tr>
+				<tr>
+				  <td class="left_title_2">家人电话:</td>
+				  <td><input name="tel" type="text" maxlength="16" />学员之间不能重复！</td>
+				  <td class="left_title_2"><!-- 学员电话： --></td>
+				  <td><!-- <input type="text" name="tel2"> --></td>
+				</tr>
+				<tr>
+				  <td class="left_title_1">微信绑定密码:</td>
+				  <td><input name="pw" type="text" maxlength="16" />例如：大连校区可以设置成“DL001、DL002……等”</td>
+				  <td width="10%" class="left_title_1"><!-- <span class="left-title">家庭地址：</span> --></td>
+				  <td><!-- <input name="address" type="text"> --></td>
+				</tr>
+				<tr>
+				  <td class="left_title_2">学管师：</td>
+				  <td><input name="xueguan" type="text" id="xueguan" maxlength="5" /></td>
+				  <td class="left_title_2"><!-- QQ： --></td>
+				  <td><!-- <input type="text" name="qq"> --></td>
+				</tr>
+				<tr>
+				  <td class="left_title_1">教学主任：</td>
+				  <td><input name="jiaoxue" type="text" id="jiaoxue" maxlength="5" /></td>
+				  <td width="10%" class="left_title_1"><!-- <span class="left-title">生日：</span> --></td>
+				  <td><!-- <input name="birthday" type="text"> --></td>
+				</tr>
+				<tr>
+				  <td class="left_title_2">备注信息:（可随意填写其它需要说明的信息）</td>
+				  <td><textarea name="other"  cols="70%" rows="6"  wrap="virtual"></textarea></td>
+				  <td class="left_title_2"><!-- 现在就读学校： --></td>
+				  <td><!-- <input type="text" name="school"> --></td>
+				</tr>
+				<tr>
+				  <td class="left_title_1">&nbsp;</td>
+				  <td>&nbsp;</td>
+				</tr>
+			  </table>
+           <div style="padding-left: 400px;"> <input name="submit" type="submit" value="提交添加" onclick="return check_message()" /></div>
+</div>
+</form>
+
+</body>
+</html>

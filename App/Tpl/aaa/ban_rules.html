@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../Public/aaa/css/style.css">
+<!--<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>-->
+<script src="../Public/js/ban/jquery.min.js"></script>
+
+<script language="javascript" type="text/javascript" src="../Public/js/WdatePicker.js"></script>
+<link href="../Public/js/skin/WdatePicker.css" type="text/css" rel="stylesheet">
+<style type="text/css">
+.box {
+margin-top: 100px;
+margin-left: 50px;
+margin-right: 50px;
+}
+.fo {
+    margin-left: 20px;
+    margin-right: 20px;
+    background-color: #FFCC99;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.bt {
+background-color: #fd6464;
+border-radius: 5px;
+color: #fff;
+cursor: pointer;
+padding: 8px 20px;
+text-decoration: none;
+border: 0px;
+}
+.bt:hover{
+    background-color: #ff7777;
+}
+#gaod select{
+  height:26px;
+  width:80px;
+}
+</style>
+</head>
+<body  style="margin-left:200px;">
+<div class="left-gg">
+     <ul>
+         <li><a href="__URL__/sc_ad"><em class="gg"></em>校区公告</a></li>
+         <li><a href="__URL__/sc_teacher"><em class="js"></em>讲师管理</a></li>
+         <li><a href="__URL__/ban_rules" class="current"><em class="mm"></em>禁排规则</a></li>
+         <li><a href="__URL__/sc_set"><em class="mm"></em>密码修改</a></li>
+     </ul>
+</div>
+<form id="ban_form" method="post" action="__ACTION__">
+	<input type="hidden" name="add" value="" id="addM"/>
+<div class="right-gg">
+     <div class="head-t">禁止排课规则管理</div>
+     <div class="main-zt">
+                <div class="rq-Table" id="gd">
+                   <div class="rq-course">
+                        <div class="table-c">
+                            <table  width="100%" border="3" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td class="bj" id="bk" width="150">老师姓名</td>
+                                <td class="bj" id="bk" width="150">禁止频率</td>
+                                <td class="bj" id="bk" width="150">开始时间</td>
+                                <td class="bj" id="bk" width="150">结束时间</td>
+                                <td class="bj" id="bk" width="300">备注说明</td>
+                                <td class="bj" id="bk" width="150">创建人</td>
+                                <td class="bj" id="bk" width="200">操作</td>
+                              </tr>
+                              <volist name="list" id="v">
+                              <tr>
+                                <td><{$v.name}></td>
+                                <td><if condition="$v.type eq 1">每天<elseif condition="$v.type eq 2"/>每周<{$v.week|week}><else/><{$v.date}></if></td>
+                                <td><{$v.time1}></td>
+                                <td><{$v.time2}></td>
+                                <td><{$v.other}></td>
+                                <td><{$v.add}></td>
+                                <!--<td><a href="__ACTION__/delt/<{$v.id}>">删除</a></td>-->
+                                <td><a href="javascript:void(0);" class="delt" deltid="<{$v.id}>">删除</a></td>
+                              </tr>
+                              </volist>
+                            </table>
+                       </div>
+                  </div>
+             </div>
+             <div class="tou" id="gaod">
+                     <ul>
+                       <li><span>老师姓名</span><!--<input type="text" name="name" required class="inpt" required/>--><select name="name"><?php fill_option($tlst)?></select></li>
+                       <li><span>禁止频率</span><select name="type" id="type" class="inpt" ><option value="1">每天</option><option value="2">每周</option><option value="3">指定日期</option></select></li>
+                       <li><span>开始时间</span><input type='text' name='time1' class='inpt' onclick="WdatePicker({dateFmt:'HH:mm'})" required/></li>
+                       <li><span>结束时间</span><input type='text' name='time2' class='inpt' onclick="WdatePicker({dateFmt:'HH:mm'})" required/></li>
+                       <li><span>备注</span><input type='text' name='other' class='inpt' /></li>
+                       <li style=" float: right;"><input class="bt" type="button" name="add" value="添加禁排规则"/></li>
+                     </ul>
+                </div>
+     </div>
+</div>
+
+</form>
+</div>
+</body>
+<script type="text/javascript">
+	
+  $("#type").change(function(event) {
+    if($(this).val()==3){
+      $(this).next().remove();
+      $(this).after("&nbsp;&nbsp;<input type='text' name='date' class='inpt' onclick="+'"WdatePicker({dateFmt:\'yyyy-MM-dd\'})"'+" required/>");
+    }else if($(this).val()==2){
+      $(this).next().remove();
+      $(this).after('&nbsp;&nbsp;<select name="week"><option value="1">星期一</option><option value="2">星期二</option><option value="3">星期三</option><option value="4">星期四</option><option value="5">星期五</option><option value="6">星期六</option><option value="0">星期日</option></select>');
+    }else{
+      $(this).next().remove();
+    }
+  });
+  
+
+  $('.delt').click(function(){
+	
+		$.ajax({
+			type:'POST',
+			async:false,
+			cache:false,
+			url:"__ACTION__/delt/" + $(this).attr('deltid'),
+			dataType:'json',
+			success:function(msg,status){
+				
+				if(msg && msg.state == 'error'){
+					alert(msg.info);	
+				}else if(msg && msg.state == 'success'){
+					alert(msg.info);
+					document.location.href="__ACTION__";
+				}
+			}
+		});
+  });
+  
+  $('.bt').click(function(){
+  	
+  	var t1 = $('input[name="time1"]').val();
+  	var t2 = $('input[name="time2"]').val();
+  	
+  	
+  	if(t1 && t2){
+  		if(t1>=t2){
+	  		alert("警告：请选择正确的授课时间段！");
+	  		return;
+	  	}	
+  	}else{
+  		alert("警告：请填全授课时间段！");
+  		return;
+  	}
+  	
+  	var data = $('#ban_form').serializeArray();
+  	$.ajax({
+			type:'POST',
+			async:false,
+			cache:false,
+			url:"./searchBans",
+			dataType:'json',
+			data:data,
+			success:function(msg,status){
+				
+				if(msg && msg.state == 'error'){
+					alert(msg.info);	
+				}else if(msg && msg.state == 'success'){
+					$('#addM').val('1'); //随意设置一个值就可以，该值无任何业务意义；
+					$('#ban_form').submit();		
+				}
+			}
+		});
+  	
+  });
+</script>
+<style>
+  .inpt{
+    width: 110px;
+    height: 25px;
+  }
+</style>
+</html>

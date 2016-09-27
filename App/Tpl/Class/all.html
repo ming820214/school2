@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../Public/css/my.css">
+<script type="text/javascript" src="../Public/js/jquery.min.js"></script>
+<title>Untitled Document</title>
+<style type="text/css">
+<!--
+
+.img {
+width: 60px;
+margin-top: -20px;
+margin-left: 20px;
+}
+
+.bt {
+  margin: 3px;
+  padding: 3px 6px;
+  background-color: seagreen;
+  border-radius: 3px;
+  line-height: 30px;
+  color: white;
+}
+.bt:hover{
+  background-color: burlywood;
+}
+td{
+  padding:5px;
+}
+th{
+  color:#333;
+}
+hr{
+    height: 1px;
+    background: black;
+    border: 0px;
+}
+.br {
+height: 0.5px;
+}
+.cla{
+  padding-left: 5px;
+}
+-->
+</style>
+</head>
+<body bgcolor="#CCCCCC">
+<div class="headd" style="left:50%;margin-left:-650px;">
+<table width="1300px" style="margin-top: -5px;">
+  <tr>
+    <td rowspan="2" width="150px" align="center"  valign="top">
+      <{$name}>
+    </td>
+    <td rowspan="2"  valign="top">
+      <a class="button white" href="<{:U('Class/all')}>">校区课表</a>
+    </td>
+    <td rowspan="2"  valign="top">
+        <form action="" method="get">
+        <input type="hidden" name="gid" value="<{$Think.get.gid}>">
+        <input type="hidden" name="sid" value="<{$Think.get.sid}>">
+        <input type="hidden" name="teacher" value="<{$Think.get.teacher}>">
+        <div style="background: burlywood;padding: 5px;border-radius: 4px;width: 220px;">
+          <input style="width: 100px;text-align: center;" type="text" name="date" onclick="WdatePicker({dateFmt:'yyyy-MM'})" readonly="readonly" value="<{$Think.get.date}>">
+          <input type="submit" value="进入" style="width:60px;margin-left:20px;" />
+        </div>
+      </form>
+    </td>
+    <th>已排课时</th>
+    <th>已确认课时</th>
+    <th>待确认课时</th>
+    <th>旷课课时</th>
+    <th rowspan="2"  valign="top"><a class="button white" href="<{:U('Class/all',array('style'=>1))}>">样式切换</a></th>
+    <if condition="($_SESSION['school'] neq 水木清华) or ($_SESSION['school'] neq 天丽校区) or ($_SESSION['position'] eq 学习管理师)">
+      <th rowspan="2"><a href="#" data-reveal-id="myModal" data-animation="fade"><img src="../Public/images/1.png" class="img" id="img"></a></th>
+      <th rowspan="2"><a href="#" data-reveal-id="myModal2" data-animation="fade"><img src="../Public/images/4.png" class="img" id="img"></a></th>
+    </if>
+  </tr>
+  <tr>
+    <td style="color: #F00"><{$tj.已排}>课时</td>
+    <td style="color: #F00"><{$tj.已确认}>课时</td>
+    <td style="color: #F00"><{$tj.待确认}>课时</td>
+    <td style="color: #F00"><{$tj.旷课}>课时</td></tr>
+  </tr>
+</table>
+    <div style="clear:both;"></div>
+<div>
+<table width="1300" style="margin-bottom: 0px;margin-top: 0px;" border="0">
+  <tr>
+    <th style="background:#9966FF;color: white;text-align: center;" width="175" height="30" scope="col">星期一</th>
+    <th style="background:#9966FF;color: white;text-align: center;" width="175" scope="col">星期二</th>
+    <th style="background:#9966FF;color: white;text-align: center;" width="175" scope="col">星期三</th>
+    <th style="background:#9966FF;color: white;text-align: center;" width="175" scope="col">星期四</th>
+    <th style="background:#9966FF;color: white;text-align: center;" width="175" scope="col">星期五</th>
+    <th style="background:#9966FF;color: white;text-align: center;" width="175" scope="col">星期六</th>
+    <th style="background:#9966FF;color: white;text-align: center;" width="175" scope="col">星期日</th>
+  </tr>
+</table>
+</div>
+</div>
+<!-- 主体课表部分 -->
+<div style="background-color: #f2f2f2;width: 1302px;margin:auto;margin-top:100px;">
+    <foreach name="data" item="vo">
+    <if condition='($key eq 8) or ($key eq 15) or ($key eq 22) or ($key eq 29) or ($key eq 36)'>
+        <div style="clear:both;"></div>
+    <else />
+    </if>
+    <table style="width:186px;float:left;">
+      <tr style="text-align: center;background:burlywood;">
+        <th height="25px"><notempty name="vo.date"><a href="<{:U('Class/day')}>?d=<{$vo.date}>"><span id="<{$vo.date}>"><{$vo.date}></span></a></notempty>&nbsp;</th>
+      </tr>
+
+      <tr>
+        <td valign="top" bgcolor="<if condition="$vo.today eq 1">bisque<elseif condition="$vo.today eq 0"/>darksalmon<else/>#CCCCCC</if>">
+          <volist name="vo.data" id="vo2">
+            <div class="cla"
+                <if condition="$vo2.state eq 1">
+                    style="border-left: 3px solid blue;"
+                <elseif condition="$vo2.state eq 2"/>
+                    style="border-left: 3px solid red;"
+                </if>
+                    title="<if condition='$vo2.why != ""'>旷课原因：<{$vo2.why}>&nbsp;&nbsp;；</if>
+科目：<{$vo2.class}>；年级：<switch name="vo2.nianji">
+													    <case value="22">高三</case>
+													    <case value="21">高二</case>
+													    <case value="20">高一</case>
+													    <case value="50">九年级</case>
+													    <case value="40">八年级</case>
+													    <case value="39">七年级</case>
+													    <case value="38">六年级</case>
+													    <case value="93">五年级</case>
+													    <case value="100">四年级</case>
+													    <case value="101">三年级</case>
+													    <case value="102">二年级</case>
+													    <case value="103">一年级</case>
+													</switch>；学管：<{$vo2.xueguan}>；教主：<{$vo2.jiaoxue}>;
+                <if condition='$vo2.sid eq 88888'>
+                   	    学员：<{$vo2.other}>
+                </if>">
+                    <{$vo2.t1}>--<{$vo2.t2}>
+                <notempty name="vo2.sid">
+                    <if condition="$vo2.sid neq 88888">
+                        <a href="<{:U('Class/all')}>?sid=<{$vo2.sid}>"><{$vo2.student}></a>◆
+                    <else />
+                        <a href="<{:U('Class/all')}>?sid=<{$vo2.sid}>">试听@</a>◆
+                    </if>
+                <else />
+                    <a href="<{:U('Class/all')}>?gid=<{$vo2.gid}>"><{$vo2.grade}></a>★
+                </notempty>
+                    <a href="<{:U('Class/all')}>?teacher=<{$vo2.teacher}>"><{$vo2.teacher}></a>
+                <if condition="$Think.get.sid eq 88888">
+                    <br/><{$vo2.other}>
+                </if>
+                <if condition="$vo2.school neq $_SESSION['school']">
+                    <br/>(<{$vo2.school}>)
+                </if>
+            </div>
+            <notempty name="Think.session.user">
+                <if condition="(($_SESSION['school'] neq 水木清华) or ($_SESSION['school'] neq 天丽校区) or ($_SESSION['position'] eq 学习管理师) or ($_SESSION['position'] eq 教务)) and ($vo2.school eq $_SESSION['school'])">
+                    <if condition="$Think.session.position neq '讲师'">
+                        <div class="clb" style="display:none;">
+                            <if condition="($vo2.state eq 0) and ($vo.date elt date('Y-m-d'))">
+                                <a onclick="qr(this,<{$vo2.id}>)"  class="bt">确认</a>
+                                <a onclick="kk(this,<{$vo2.id}>)" class="bt">旷课</a>
+                            </if>
+                            <if condition="($vo2.state eq 0) and ($vo.date egt date('Y-m-d'))">
+                                <a onclick="delt(this,<{$vo2.id}>)" class="bt">删除</a>
+                                <a onclick="change(this,<{$vo2.id}>)" class="bt" data-reveal-id="myModal3">调课</a>
+                            </if>
+                        </div>
+                    </if>
+                </if>
+            </notempty>
+          <hr>
+          </volist>
+        </td>
+      </tr>
+
+      <if condition="(isset($vo['state'])) and ($vo.state eq 0) and (isset($vo['data'])) and ($vo.today elt 0)">
+        <tr><td bgcolor="#CC3300" style="text-align: center;font-weight: bolder;"><a style="color: white;" href="<{:U('Class/day')}>?d=<{$vo.date}>">待确认</a></td></tr>
+      </if>
+    </table>
+    </foreach>
+    <div style="clear:both;"></div>
+</div>
+<include file="footer" />
+</body>
+</html>

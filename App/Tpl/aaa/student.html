@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-Type" content="charset=UTF-8"/>
+<title>校区排课系统</title>
+<link rel="stylesheet" type="text/css" href="../Public/aaa/css/style.css">
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<style>
+
+</style>
+</head>
+<body style="background-color: #CCCCCC;">
+<br><br>
+<div class="container">
+    <div class="middle1">
+            <div class="middle-middle1">
+            <div class="rq-Table">
+               <div class="rq-course">
+                    <div class="table-c">
+                        <table  width="1300" border="3" cellspacing="0" cellpadding="0">
+                        <thead>
+                          <tr>
+                            <td class="bj" id="bk2" width="200" colspan="10" >
+                            <form action="__URL__/st_search" method="post">
+                            <img style="float:left;" src="../Public/aaa/images/1.png"><span>校区所有学员列表</span>
+                            <sapn><input class="mx1" type="text" name="name" placeholder="姓名"><input type="submit" class="ann1" value="搜索"></sapn>
+                            </form>
+                            </td>
+                          </tr>
+                          <tr class="jc">
+                            <td width="140">编号</td>
+                            <td width="100">姓名</td>
+                            <td width="100">激活码</td>
+                            <td width="100">微信状态</td>
+                            <td width="100">联系电话</td>
+                            <td width="80">学管师</a></td>
+                            <td width="80">教学主任</td>
+                            <td width="330">备注信息</td>
+                            <td width="70">查看课表</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <volist name="st" id="v">
+                        <php>$c++;</php>
+                          <tr>
+                            <td width="140"><{$v.std_id}></td>
+                            <td width="100"><{$v.name}></td>
+                            <td width="110"><{$v.pw}></td>
+                            <td width="100"><if condition="$v.wxid eq 1">未绑定<else/>已绑定</if></td>
+                            <td width="100"><{$v.tel}></a></td>
+                            <td width="80"><{$v.xueguan}></a></td>
+                            <td width="80"><{$v.jiaoxue}></td>
+                            <td width="330"><{$v.other}></td>
+                            <td width="70"><a class="tb2" href="__GROUP__/Class/all/sid/<{$v.id}>"></a></td>
+                          </tr>
+                          </volist>
+                        </tbody>
+                        </table>
+                        <div class="xy">当前共<{$c}>名学员信息</div>
+
+
+                       </div>
+                  </div>
+             </div>
+
+
+
+            </div>
+    </div>
+</div>
+<script>
+$(function(){
+    $("table tbody tr:even").addClass('bj2');
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

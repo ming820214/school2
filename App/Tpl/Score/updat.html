@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>积分变动</title>
+        <link href="../Public/css/hfmsg.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.scbg {
+	background-repeat: repeat-y;
+	background-position: center top;
+	}
+.bc {
+height: 40px;
+width: 120px;
+color: white;
+background-color: #633;
+font-weight: bold;
+font-size: 18px;
+}
+</style>
+
+		
+    </head> 
+    <body>
+    <blockquote>
+      <p>变更 <{$vo['name']}>同学的积分，申请：</p>
+    </blockquote><hr/><form name="form1" method="post" action="__URL__/update">
+    <input name="id" type="hidden" id="id" value="<{$vo['id']}>">
+    <table width="1000" height="100" border="0" align="center" background="../Public/images/000.jpg">
+  <tr>
+  <th width="109" scope="row">&nbsp;</th>
+    <th width="204" scope="row"><p>
+      <label>
+      <input name="up" type="radio" value="add" checked>
+      增加
+      </label>
+      <input type="radio" name="up" value="dec">
+      减少
+    </p>
+      <label>
+      <input name="left" type="text" id="left" size="10">
+      积分</label></th>
+    <th width="310" valign="middle" scope="row">
+      <label>积分变动事由：
+      <br>
+      <textarea name="info" rows="3" id="info"></textarea>
+      </label></th>
+    <th width="244" scope="row"><label>
+      <input name="Submit" type="submit" class="bc" value="提交">
+    </label></th>
+    <th width="111" scope="row">&nbsp;</th>
+  </tr>
+</table>
+
+    </form>
+</body>
+</html>

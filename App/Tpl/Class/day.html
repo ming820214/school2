@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="../Public/js/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="../Public/css/my.css">
+<title>Untitled Document</title>
+<style type="text/css">
+<!--
+.STYLE1 {color: #FFFFFF}
+.bt:hover {
+background-color: #F90;
+height: 30px;
+width: 80px;
+font-size: 15px;
+font-weight: bold;
+color: #003;
+border-radius: 0px;
+}
+.bt {
+background-color: #EED177;
+height: 30px;
+width: 80px;
+font-size: 15px;
+font-weight: bold;
+color: #666;
+border-radius: 10px;
+}
+.head-b {
+float: left;
+margin-left: 100px;
+background: burlywood;
+width: 100px;
+padding: 5px;
+text-align: center;
+border-radius: 4px;
+}
+.head-a {
+float: left;
+width: 250px;
+}
+-->
+</style>
+<script type="text/javascript">
+function show_confirm()
+  {
+  var r=confirm("确认课程已完成？\n系统将会删除该课程并减少学员相应课时数!\n如有错误及时调整、变更……");
+  if (r==true)
+    {
+  return true;
+    }
+  else
+    {
+  return false;  }
+  }
+
+function diag(id)
+  {
+      var why=prompt("旷课原因（必填）：",'');
+      if(why)
+      {
+          $.ajax({
+             url: "__GROUP__/Api/class_why",
+             data: "id="+id+"&why="+why,
+             type: "POST",
+             async:false,
+             dataType:"json",
+
+             success: function(msg){
+                if(msg==1){
+                  return true;
+                }else{
+                  return false;
+                }
+              }
+          });
+      }else{
+          return false;
+      }
+  }
+</script>
+</head>
+
+<body bgcolor="slategrey">
+<div class="head" style="width:1300px;left:50%;margin-left:-650px;padding-left:0px;">
+    <div class="head-a"><{$cls.0.timee}>课表</div>
+    <div class="head-a">总计：<{$count}>课时</div>
+    <div class="head-b"><a href="__URL__/all">返回本月课表</a></div>
+</div>
+<div style="width:1300px;margin:auto;background-color:blanchedalmond;padding-bottom: 50px;padding-top: 100px;">
+<table width="984" border="0" align="center">
+  <tr bgcolor="#666666">
+    <td width="186"><div align="center" class="STYLE1">
+      <h4>上课时间</h4>
+    </div></td>
+    <td width="80"><div align="center" class="STYLE1">
+      <h4>课时数</h4>
+    </div></td>
+    <td width="195"><div align="center" class="STYLE1">
+      <h4>上课学员</h4>
+    </div></td>
+    <td width="127"><div align="center" class="STYLE1">
+      <h4>科 目</h4>
+    </div></td>
+    <td width="102"><div align="center" class="STYLE1">
+      <h4>主讲老师</h4>
+    </div></td>
+  <td width="144"><div align="center" class="STYLE1">
+      <h4>备注</h4>
+    </div></td>
+  </tr>
+</table>
+<table width="984" border="1" align="center" bordercolor="#CCCCCC">
+  <volist name='cls' id='cls'>
+  <tr><form action="__URL__/delt" method="post"><input name="stuid" type="hidden" value="<{$cls.stuid}>" />
+    <td width="186"><div align="center"><{$cls.time1}>—<{$cls.time2}></div></td>
+    <td width="80"><div align="center"><{$cls.count}></div><input name="count" type="hidden" value="<{$cls.count}>" /></td>
+    <td width="204"><div align="center"><if condition="$cls.grade neq ''"><{$cls.grade.name}>★<else/></if><if condition="$cls['student']['name']!=''"><{$cls.student.name}><else/>#试听课#</if>
+      <input name="id" type="hidden" value="<{$cls.id}>" />
+    </div></td>
+    <td width="129"><div align="center"><{$cls.class}>
+      <input name="km" type="hidden" value="<{$cls.class}>" />
+    </div></td>
+    <td width="102"><div align="center"><{$cls.teacher}></div></td>
+    <td width="153"><div align="center"><{$cls.other}></div></td>
+  </form></tr>
+  </volist>
+</table>
+</div>
+</body>
+</html>

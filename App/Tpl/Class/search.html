@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../Public/css/my.css">
+<script type="text/javascript" src="../Public/js/jquery.min.js"></script>
+<title>Untitled Document</title>
+<style type="text/css">
+<!--
+
+.bt {
+  margin: 3px;
+  padding: 3px 6px;
+  background-color: seagreen;
+  border-radius: 3px;
+  line-height: 30px;
+  color: white;
+}
+.bt:hover{
+  background-color: burlywood;
+}
+td{
+  padding:5px;
+}
+th{
+  color:#333;
+}
+hr{
+    height: 1px;
+    background: black;
+    border: 0px;
+}
+.br {
+height: 0.5px;
+}
+.cla{
+  padding-left: 5px;
+}
+-->
+</style>
+</head>
+<body bgcolor="#CCCCCC">
+<div class="headd" style="left:50%;margin-left:-650px;">
+<table width="800px" style="margin-top: -5px;">
+  <tr>
+    <td rowspan="2" width="150px" align="center"  valign="top">
+      <{$name}>
+    </td>
+    <td rowspan="2"  valign="top">
+    </td>
+    <td rowspan="2"  valign="top">
+        <form action="" method="get">
+        <input type="hidden" name="gid" value="<{$Think.get.gid}>">
+        <input type="hidden" name="sid" value="<{$Think.get.sid}>">
+        <input type="hidden" name="teacher" value="<{$Think.get.teacher}>">
+        <div style="background: burlywood;padding: 5px;border-radius: 4px;width: 220px;">
+          <input style="width: 100px;text-align: center;" type="text" name="date" onclick="WdatePicker({dateFmt:'yyyy-MM'})" readonly="readonly" value="<{$Think.get.date}>">
+          <input type="submit" value="进入" style="width:60px;margin-left:20px;" />
+        </div>
+      </form>
+    </td>
+    <th>已排课时</th>
+    <th>已确认课时</th>
+    <th>待确认课时</th>
+    <th>旷课课时</th>
+  </tr>
+  <tr>
+    <td style="color: #F00"><{$tj.已排}>课时</td>
+    <td style="color: #F00"><{$tj.已确认}>课时</td>
+    <td style="color: #F00"><{$tj.待确认}>课时</td>
+    <td style="color: #F00"><{$tj.旷课}>课时</td></tr>
+  </tr>
+</table>
+    <div style="clear:both;"></div>
+<div>
+<table width="1300" style="margin-bottom: 0px;margin-top: 0px;" border="0">
+  <tr>
+    <th style="background:#9966FF;color: white;text-align: center;" width="175" height="30" scope="col">星期一</th>
+    <th style="background:#9966FF;color: white;text-align: center;" width="175" scope="col">星期二</th>
+    <th style="background:#9966FF;color: white;text-align: center;" width="175" scope="col">星期三</th>
+    <th style="background:#9966FF;color: white;text-align: center;" width="175" scope="col">星期四</th>
+    <th style="background:#9966FF;color: white;text-align: center;" width="175" scope="col">星期五</th>
+    <th style="background:#9966FF;color: white;text-align: center;" width="175" scope="col">星期六</th>
+    <th style="background:#9966FF;color: white;text-align: center;" width="175" scope="col">星期日</th>
+  </tr>
+</table>
+</div>
+</div>
+<!-- 主体课表部分 -->
+<div style="background-color: #f2f2f2;width: 1302px;margin:auto;margin-top:100px;">
+    <foreach name="data" item="vo">
+    <if condition='($key eq 8) or ($key eq 15) or ($key eq 22) or ($key eq 29) or ($key eq 36)'><div style="clear:both;"></div><else /></if>
+    <table style="width:186px;float:left;">
+      <tr style="text-align: center;background:burlywood;">
+        <th height="25px"><notempty name="vo.date"><{$vo.date}></notempty>&nbsp;</th>
+      </tr>
+
+      <tr>
+        <td valign="top" bgcolor="<if condition="$vo.today eq 1">bisque<elseif condition="$vo.today eq 0"/>darksalmon<else/>#CCCCCC</if>">
+          <volist name="vo.data" id="vo2">
+            <div class="cla" <if condition="$vo2.state eq 1">style="border-left: 3px solid blue;"<elseif condition="$vo2.state eq 2"/>style="border-left: 3px solid red;"</if> title="年级：<{$vo2.nianji}>；学管：<{$vo2.xueguan}>；教主：<{$vo2.jiaoxue}>;<if condition='$vo2.sid eq 88888'>学员：<{$vo2.other}></if>"><{$vo2.t1}>--<{$vo2.t2}><notempty name="vo2.sid"><if condition="$vo2.sid neq 885888"><a href="<{:U('Class/all')}>?sid=<{$vo2.sid}>"><{$vo2.student}></a>◆</if><else /><a href="<{:U('Class/all')}>?gid=<{$vo2.gid}>"><{$vo2.grade}></a>★</notempty><{$vo2.teacher}><if condition="$Think.get.sid eq 88888"><br/><{$vo2.other}></if><if condition="$vo2.school neq $_SESSION['school']"><br/>(<{$vo2.school}>)</if>
+            </div>            
+            <hr>
+          </volist>
+        </td>
+      </tr>
+    </table>
+    </foreach>
+    <div style="clear:both;"></div>
+</div>
+<include file="footer" />
+</body>
+</html>

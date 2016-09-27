@@ -1,0 +1,154 @@
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="../Public/css/my.css">
+<style type="text/css">
+<!--
+.STYLE1 {font-size: 12px}
+.STYLE4 {
+	font-size: 12px;
+	color: #1F4A65;
+	font-weight: bold;
+}
+
+a:link {
+	font-size: 12px;
+	color: #06482a;
+	text-decoration: none;
+
+}
+a:visited {
+	font-size: 12px;
+	color: #06482a;
+	text-decoration: none;
+}
+a:hover {
+	font-size: 12px;
+	color: #FF0000;
+	text-decoration: underline;
+}
+a:active {
+	font-size: 12px;
+	color: #FF0000;
+	text-decoration: none;
+}
+.STYLE5 {color: #FFFFFF}
+.STYLE7 {font-size: 12px; color: #F0F0F0; }
+.STYLE9 {font-size: 14}
+.STYLE10 {color: #FFFF00}
+.STYLE11 {font-size: 18px}
+
+-->
+</style>
+</head>
+<body style="margin-left:200px;">
+<div class="menu">
+<ul style="padding-left: 0px;margin-top:12px;">
+    <li class="menu_current"><a href="__URL__/course">课时管理</a></li>
+    <li class="menu-list"><a href="__URL__/course_search">消耗记录</a></li>
+</ul>
+</div>
+<div class="head">课时管理，总课数少于10的将红色显示。</div>
+<div style="height:60px"></div>
+<table width="95%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="30">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="15" height="30"><img src="../Public/images/tab_03.gif" width="15" height="30" /></td>
+        <td background="../Public/images/tab_05.gif"><img src="../Public/images/311.gif" width="16" height="16" /> <span class="STYLE4"> 校区所有学员剩余课时列表</span></td>
+        <td width="14"><img src="../Public/images/tab_07.gif" width="14" height="30" /></td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="9" background="../Public/images/tab_12.gif">&nbsp;</td>
+        <td bgcolor="e5f1d6"><table width="100%" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CECECE">
+          <tr>
+            <td width="10%" height="25" background="../Public/images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE1 STYLE5">姓名</div></td>
+            <td height="25" colspan="3" background="../Public/images/tab_14.gif" class="STYLE1"><table width="100%" height="70" border="0">
+              <tr>
+                <td height="25" colspan="11"><div align="center" class="STYLE5"><span class="STYLE11">课时管理</span></div></td>
+              </tr>
+              <tr>
+                <td width="28%"><div align="center" class="STYLE10">截止时间</div></td>
+                <td width="16%"><div align="center" class="STYLE10">总课时数</div></td>
+                <td width="56%"><table width="330" border="0" align="center">
+                  <tr>
+			 	 <td width="50"><div align="center" class="STYLE10">语文</div></td>
+                <td width="50"><div align="center" class="STYLE10">数学</div></td>
+                <td width="50"><div align="center" class="STYLE10">英语</div></td>
+                <td width="30"><div align="center" class="STYLE10">物理</div></td>
+                <td width="30"><div align="center" class="STYLE10">化学</div></td>
+                <td width="30"><div align="center" class="STYLE10">生物</div></td>
+                <td width="30"><div align="center" class="STYLE10">政治</div></td>
+                <td width="30"><div align="center" class="STYLE10">历史</div></td>
+                <td width="30"><div align="center" class="STYLE10">地理</div></td>                  </tr>
+                </table></td>
+              </tr>
+            </table></td>
+            <td width="12%" height="25" background="../Public/images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE5">修改</div></td>
+            <td width="10%" background="../Public/images/tab_14.gif" class="STYLE1"><div align="center" class="STYLE2 STYLE5">课时备注</div></td>
+          </tr>
+		
+		<php>
+		$count=0;   </php>
+		<volist name='st' id='vo'>
+
+<php>
+   if($vo['id']['course'] < 10){
+      echo "<tr style='font-weight: bolder;color: red;'>";
+    }else{
+      echo "<tr>";
+    }
+</php>
+       <td height="20" bgcolor="#FFFFFF" class="STYLE2"><div align="center" class="STYLE2 STYLE1"><{$vo.name}></div></td>
+       <td width="19%" height="20" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1"><{$vo.id.lasttime}></div></td>
+       <td width="11%" bgcolor="#FFFFFF"><div align="center" class="STYLE2 STYLE1"><{$vo.id.course}></div></td>
+       <td width="38%" height="20" bgcolor="#FFFFFF">
+          <table width="330" border="0" align="center">
+                  <tr>
+                <td width="50"><div align="center" class="STYLE1"><{$vo.id.a}></div></td>
+                <td width="50"><div align="center" class="STYLE1"><{$vo.id.b}></div></td>
+                <td width="50"><div align="center" class="STYLE1"><{$vo.id.c}></div></td>
+                <td width="30"><div align="center" class="STYLE1"><{$vo.id.d}></div></td>
+                <td width="30"><div align="center" class="STYLE1"><{$vo.id.e}></div></td>
+                <td width="30"><div align="center" class="STYLE1"><{$vo.id.f}></div></td>
+                <td width="30"><div align="center" class="STYLE1"><{$vo.id.g}></div></td>
+                <td width="30"><div align="center" class="STYLE1"><{$vo.id.h}></div></td>
+                <td width="30"><div align="center" class="STYLE1"><{$vo.id.i}></div></td>                  </tr>
+                </table>
+
+
+
+
+
+       </td>
+	   
+       <td height="20" bgcolor="#FFFFFF"><div align="center"><img src="../Public/images/037.gif" width="9" height="9" /><span class="STYLE1"> [</span><a href="__URL__/course_info?id=<{$vo.id.stuid}>">修改</a><span class="STYLE1">]</span></div></td>
+       <td width="10%" bgcolor="#FFFFFF"><{$vo.id.other}></td> 
+		<php>
+		$count++;		</php>		
+    </volist>
+        </table></td>
+        <td width="9" background="../Public/images/tab_16.gif">&nbsp;</td>
+      </tr>
+    </table></td>
+  </tr>
+  <tr>
+    <td height="29"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="15" height="29"><img src="../Public/images/tab_20.gif" width="15" height="29" /></td>
+        <td background="../Public/images/tab_21.gif"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="40%"><div align="left"><span class="STYLE1">当前共<php> echo $count; </php>名学员信息</span></div></td>
+            <td width="60%" class="STYLE1">&nbsp;</td>
+          </tr>
+        </table></td>
+        <td width="14"><img src="../Public/images/tab_22.gif" width="14" height="29" /></td>
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</body>

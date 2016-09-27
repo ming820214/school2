@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+html, body {height:100%;overflow:hidden;} /*为兼容ie7,ff*/
+body {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	margin:0px;
+	text-align:center;
+	border-right:1px #ccc solid;
+	background-color: #494C4E;
+}
+
+
+.sidebar-nav {
+	-webkit-transition: all 500ms ease;
+	-moz-transition: all 500ms ease;
+	-ms-transition: all 500ms ease;
+	-o-transition: all 500ms ease;
+	transition: all 500ms ease;
+	width:200px;
+	overflow:hidden;
+}
+.sidebar-nav li {
+	overflow:hidden;
+	height:50px;
+	line-height:50px;
+	margin:1px 0;
+	*margin:-3px 0;
+}
+.sidebar-nav li a {
+	display:block;
+	text-decoration:none;
+	font-size:16px;
+	color:#CCC;
+	padding-left:0px;
+}
+.sidebar-nav .snav-header a, .sidebar-nav .snav-header-list a{
+	padding-left:0px;
+	font-size:18px;
+	color:#FFF;
+	background:#494c4e;
+}
+.snav unstyled{
+    padding-left: 0px;
+
+}
+.sidebar-nav .snav-header .arrow {
+	border:transparent dashed 10px;
+	border-bottom:#242627 solid 10px;
+	display:block;
+	margin:10px 20px 0 0;
+	cursor:pointer;
+	float:right;
+}
+.sidebar-nav .snav-header.open .arrow {
+	margin:20px 20px 0 0;
+	border:transparent dashed 10px;
+	border-top:#242627 solid 10px;
+}
+.sidebar-nav .snav {
+	margin:0;
+}
+.sidebar-nav .snav-header-list {
+	position:relative;
+}
+.sidebar-nav .snav-list {
+	display:none;
+	position:relative;
+}
+.sidebar-nav .snav-list a{
+	border-left:6px #36393a solid;
+}
+.sidebar-nav .snav-list a:hover {
+	border-left:6px #242627 solid;
+	background:#242627;
+}
+.sidebar-nav .snav-list.current a {
+	border-left:6px #00aff0 solid;
+	background:#242627;
+}
+.sidebar-nav .snav-list .snav-small {
+	position:absolute;
+	z-index:100;
+	display:inline-block;
+	top: 0;
+	width: 70px;
+	overflow:hidden;
+	text-align:right;
+	border:none !important;
+	padding:0;
+	font-size:14px;
+	right:20px;
+	background: none;
+	color: #00AFF0;
+}
+.sidebar-nav .snav-list .snav-small:hover {
+	text-decoration:underline;
+	background:none;
+}
+.sidebar-nav li.current .arrow, .sidebar-nav .snav-header-list.current .arrow {
+	overflow: hidden;
+	position: absolute;
+	top:10px;
+	right:0;
+	border-color: transparent;
+	border-style: dashed;
+	border-right-color: #FFF;
+	border-right-style: solid;
+	border-width: 15px;
+	display: inline-block;
+	width: 0;
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+	cursor: pointer;
+}</style>
+
+<script type="text/javascript" language="javascript" src="../Public/js/jquery-1.3.2.min.js"></script>
+
+<script type="text/javascript">
+function max(a) {
+	var b = a[0];
+	for(var i=1;i<a.length;i++){ if(b<a[i])b=a[i]; }
+	return b;
+}
+function currentMenuItem(a) {
+	window.frames['main'].location.href= a;
+}
+function scrollButton() {
+	if($(".sidebar-nav").height() > $(".content-main").height()) {
+		$(".scroll-button").show();
+	} else {
+		if($(".sidebar-nav").position().top == 0) $(".scroll-button").hide();
+	}
+}
+function switchHandler(s) {
+	window.frames['main'].location.reload();
+	$('#current-account').html(s);
+}
+function strlen(str) {
+		var n = 0;
+		for(i=0;i<str.length;i++){
+			var leg=str.charCodeAt(i);
+			n+=1;
+		}
+		return n;
+}
+$(document).ready(function() {
+	//顶部子导航
+	$(".hnav").delegate(".hnav-parent", "mouseover", function(){
+		var $this = this;
+		if ($(this).attr('id') == 'wechatpanel') {
+			if ($(this).attr('loading') == '1'){
+				return false;
+			}
+			position();
+			if (cookie.get('wechatloaded') == '1') {
+				return true;
+			}
+			$($this).find(".hnav-child").html('<li><a>加载中</a></li>');
+			$(this).attr('loading', '1');
+			ajaxopen('member.php?act=wechat&', function(s){
+				var obj = $($this).find(".hnav-child");
+				var html = '';
+				for (i in s) {
+					html += '<li><a href="account.php?act=switch&id='+s[i]['weid']+'" onclick="return ajaxopen(this.href, function(s) {main.document.location.reload();$(\'#current-account\').html(s)})">'+s[i]['name']+'</a></li>';
+				}
+				obj.html(html);
+				$('#wechatpanel').attr('loading', '0');
+			});
+		} else {
+			position();
+		}
+		function position() {
+			var tmp = new Array();
+			$($this).find(".hnav-child").show();
+			$($this).find(".hnav-child li").each(function(i) {
+				tmp[i] = strlen($(this).find("a").html());
+			});
+			$($this).find(".hnav-child li a").css("width", max(tmp)*18);
+			$($this).find(".hnav-child").css("left", $($this).offset().left);
+		}
+		return false;
+	});
+	$(".hnav").delegate(".hnav-parent", "mouseout", function(){
+		$(".hnav-child").hide();
+	});
+	//左侧导航
+	$(".sidebar-nav").delegate(".snav-header", "click", function(){
+		$(this).toggleClass("open");
+		$(this).parent().find(".snav-list").each(function(i) {
+			$(this).toggle();
+		});
+		scrollButton();
+		return false;
+	});
+	$(".sidebar-nav .snav").each(function() {
+		if($(this).find(".snav-header").hasClass("open")) {
+			$(this).find(".snav-list").each(function() {
+				$(this).find(".snav-header").toggle();
+			});
+		}
+		$(this).find(".snav-list").each(function() {
+			if($(this).hasClass("current")) {
+				$(this).parent().find(".snav-header").toggleClass("open");
+				$(this).parent().find(".snav-list").each(function() {
+					$(this).toggle();
+				});
+			}
+		});
+		$(this).find(".snav-list a,.snav-header-list a").click(function() {
+			$(".snav-list,.snav-header-list").removeClass("current");
+			$(this).parent().addClass("current");
+			currentMenuItem($(this).attr("href"));
+			return false;
+		});
+	});
+});
+$(function() {
+	//调整框架宽高 兼容ie8
+	$(".content-main, .content-main table td").height($(window).height()-65);
+	$("#main").width($(window).width()-200);
+	//右侧菜单上下控制按钮
+	var postion = 0,top = 0;
+	$(".scroll-button .scroll-button-up").click(function() {
+		postion = $(".sidebar-nav").position().top;
+		if(postion > 0 || postion==0) {
+			top = 0;
+		} else {
+			top = postion+$(".content-main").height()-50;
+			if(top > 0) top =0;
+		}
+		$(".sidebar-nav").css({'position' : 'absolute', 'top' : top});
+	});
+	$(".scroll-button .scroll-button-down").click(function() {
+		postion = $(".sidebar-nav").position().top;
+		if(postion < 0 || postion==0) {
+			top = postion-$(".content-main").height()+50;
+			if(top< -($(".sidebar-nav").height()-$(".content-main").height()+50)) top = -($(".sidebar-nav").height()-$(".content-main").height()+50);
+		} else {
+			top =0;
+		}
+		$(".sidebar-nav").css({'position' : 'absolute', 'top' : top});
+	});
+	$.getScript('http%3A%2F%2Fs13.cnzz.com%2Fstat.php%3Fid%3D1998411%26web_id%3D1998411');
+	$.get('index.php?act=announcement', function(s){
+		$('body').append(s);
+		if(cookie.get("we7_tips") == "0") {
+			$("#we7_tips").hide();
+		}
+	});
+	$('.sidebar-nav').parent().on('mousewheel', function(e, ui){
+		var step = parseInt(e.originalEvent.wheelDelta);
+		var step = step / 120;
+		if(step > 0) {
+			postion = $(".sidebar-nav").position().top;
+			if(postion > 0 || postion==0) {
+				top = 0;
+			} else {
+				top = postion+$(".content-main").height()-50*step;
+				if(top > 0) top =0;
+			}
+			$(".sidebar-nav").css({'position' : 'absolute', 'top' : top});
+		} else {
+			postion = $(".sidebar-nav").position().top;
+			if(postion < 0 || postion==0) {
+				top = postion-$(".content-main").height()-50*step;
+				if(top< -($(".sidebar-nav").height()-$(".content-main").height()+50)) top = -($(".sidebar-nav").height()-$(".content-main").height()+50);
+			} else {
+				top =0;
+			}
+			$(".sidebar-nav").css({'position' : 'absolute', 'top' : top});
+		}
+	});
+});
+$(window).resize(function(){
+	//调整框架宽高 兼容ie8
+	$(".content-main, .content-main table td").height($(window).height()-65);
+	$("#main").width($(window).width()-200);
+});
+</script>
+
+
+
+</head>
+
+<body>
+<div class="sidebar-nav" style="position: absolute; top: -3px; ">
+<ul class="snav unstyled" style="
+    padding-left: 0px;
+">
+		<li class="snav-header"><a href="">积分管理<i class="arrow"></i></a></li>
+		<li class="snav-list" style="display: none; "><a href="__URL__/main" target="main">学员积分<i class="arrow"></i></a></li>
+		</ul>
+
+
+</div>
+</body>
+</html>
