@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>鸿文教育集团</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="white">
+	<meta name="format-detection" content="telephone=no">
+	<meta name="apple-touch-fullscreen" content="yes">
+    <script type="text/javascript" src="../Public/js/jquery.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script type="text/javascript" src="../Public/js/WXCommon.js"></script>
+    
+    <script type="text/javascript">
+         $(function() {
+                var options = {
+                    activityId: 20161130,
+                    isClickCount: 1, //0不记录 1记录 默认不记录                  
+                    url: location.href,                  
+                    domainUrl: "http://i.ihongwen.com/",                  
+                    imgUrl: "http://i.ihongwen.com/school2/Public/images/hongwen_door.jpg",                  
+                    tittle: '我是第18000位为鸿文教育5周年庆生的人，和我一起送上祝福吧',                  
+                    callBack: function (){}
+                };             
+                    $.WXShare(options);               
+                    /* $('.ajaxBtn').click(function () {                  $(".layer").show();              });                
+                    $('.reset').click(function () {                  $(".layer").hide();              });    */       
+                });
+    </script>
+</head>
+<body>
+  <h1>Hello 鸿文!</h1>
+</body>
+</html>
