@@ -10,11 +10,15 @@ class JssdkAction extends Action {
   }
 
   public function getSignPackage() {
-    $jsapiTicket = $this->getJsApiTicket();
+  	
+  	$data=M('access_share')->where('id=1')->find();
+  	
+    $jsapiTicket = $this->getJsApiTicket($data);
 
     // 注意 URL 一定要动态获取，不能 hardcode.
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-    $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+//     $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]";
 
     $timestamp = time();
     $nonceStr = $this->createNonceStr();
@@ -33,17 +37,19 @@ class JssdkAction extends Action {
       "rawString" => $string
     );
     
-    $data=M('access_share')->where('id=1')->find();
+//     $data=M('access_share')->where('id=1')->find();
+    
+    $data['appId'] = $this->appId;
+    $data['nonceStr'] = $nonceStr;
+    
+    $data['signature'] = $signature;
+    $data['jsapi_ticket'] = $jsapiTicket;
+    $data['access_token'] = $this->access_token;
     
     if($data == null){
-    	$data['appId'] = $this->appId;
-    	$data['nonceStr'] = $nonceStr;
-    	$data['timestamp'] = $timestamp;
-    	$data['signature'] = $signature;
-    	$data['jsapi_ticket'] = $jsapiTicket;
-    	$data['access_token'] = $this->access_token;
-    	
     	M('access_share')->add($data);
+    }else if($data['timestamp'] < time()){
+    	M('access_share')->save($data);
     }
     return $signPackage; 
   }
@@ -57,21 +63,20 @@ class JssdkAction extends Action {
     return $str;
   }
 
-  private function getJsApiTicket() {
+  private function getJsApiTicket(&$data) {
     // jsapi_ticket 应该全局存储与更新，以下代码以写入到文件中做示例
-  	$data=M('access_share')->where('id=1')->find();
   	
   	if($data){
   		if ($data['timestamp'] < time()) {
-  			$accessToken = $this->getAccessToken();
+  			$accessToken = $this->getAccessToken($data);
   			// 如果是企业号用以下 URL 获取 ticket
   			// $url = "https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=$accessToken";
   			$url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=$accessToken";
   			$res = json_decode($this->httpGet($url));
   			$ticket = $res->ticket;
   			if ($ticket) {
-  				$data->timestamp = time() + 7000;
-  				$data->jsapi_ticket = $ticket;
+//   				$data['timestamp'] = time() + 7000;
+  				$data['jsapi_ticket'] = $ticket;
   				//         $this->set_php_file("jsapi_ticket.php", json_encode($data));
   				M('access_share')->where('id=1')->save($data);
   			}
@@ -90,10 +95,9 @@ class JssdkAction extends Action {
     return $ticket;
   }
 
-  private function getAccessToken() {
+  private function getAccessToken(&$data) {
     // access_token 应该全局存储与更新，以下代码以写入到文件中做示例
 
-  	$data=M('access_share')->where('id=1')->find();
   	if($data){
   		if ($data['timestamp'] < time()) {
   			// 如果是企业号用以下URL获取access_token
@@ -102,8 +106,8 @@ class JssdkAction extends Action {
   			$res = json_decode($this->httpGet($url));
   			$access_token = $res->access_token;
   			if ($access_token) {
-  				//$data['timestamp'] = time() + 7000;
-  				$data->access_token = $access_token;
+  				$data['timestamp'] = time() + 7000;
+  				$data['access_token'] = $access_token;
   				M('access_share')->where('id=1')->save($data);
   			}
   		} else {
@@ -114,7 +118,7 @@ class JssdkAction extends Action {
   		// $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$this->appId&corpsecret=$this->appSecret";
   		$url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=$this->appId&secret=$this->appSecret";
   		$res = json_decode($this->httpGet($url));
-      $access_token = $res->access_token;
+      	$access_token = $res->access_token;
   		
   	}
     
