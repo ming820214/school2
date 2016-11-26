@@ -17,13 +17,14 @@
                 var options = {
                     activityId: 20161130,
                     isClickCount: 1, //0不记录 1记录 默认不记录                  
-                    url: location.href,                  
+                    url: location.href.split('#')[0],                  
                     domainUrl: "http://i.ihongwen.com/",                  
                     imgUrl: "http://i.ihongwen.com/school2/Public/images/hongwen_door.jpg",                  
                     tittle: '我是第18000位为鸿文教育5周年庆生的人，和我一起送上祝福吧',                  
                     callBack: function (){}
-                };             
-                    $.WXShare(options);               
+                };          
+                
+                $.WXShare(options);               
                     /* $('.ajaxBtn').click(function () {                  $(".layer").show();              });                
                     $('.reset').click(function () {                  $(".layer").hide();              });    */       
                 });

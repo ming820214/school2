@@ -19,15 +19,25 @@ class WeixinShareAction extends JssdkAction {
 			$data= $tk;				
 		}
 		
-		
-		$this->ajaxReturn(['data'=>$data],'JSON');
+		//var_dump($data);
+		$this->ajaxReturn($data,'JSON');
 	}
 	
 	public function hongwenshare(){
-		
-// 		$data = $this->getSignPackage();
-		
-		$this->display();
+		$link = $_GET['linked'];
+		if($link){
+			$tk=M('access_share')->where('id=1')->find();
+			if(!$tk || $tk['expire_time']<time()){
+				$data = $this->getSignPackage();
+			}else{
+				$data= $tk;				
+			}
+			
+			//var_dump($data);
+			$this->ajaxReturn($data,'JSON');	
+		}else{
+			$this->display();
+		}
 	}
 	
 //---首页-----
