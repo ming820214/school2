@@ -4,7 +4,7 @@
 class WeixinShareAction extends JssdkAction {
 
 	public function __construct(){
-		parent::__construct("wx0fa3e4e59355ad6d", "1c6e7cc02f4bebe694eb59d4d5c07266");
+		parent::__construct("wx0fa3e4e59355ad6d", "1c6e7cc02f4bebe694eb59d4d5c07266"); 
 	}
 	
 	/**
