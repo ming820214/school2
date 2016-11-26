@@ -20,7 +20,7 @@ class WeixinShareAction extends JssdkAction {
 		}
 		
 		
-		$this->ajaxReturn($data,'JSON');
+		$this->ajaxReturn(['data'=>$data],'JSON');
 	}
 	
 	public function hongwenshare(){
