@@ -20,7 +20,11 @@
                     url: location.href.split('#')[0],                  
                     domainUrl: "http://i.ihongwen.com/",                  
                     imgUrl: "http://i.ihongwen.com/school2/Public/images/hongwen_door.jpg",                  
-                    tittle: '我是第18000位为鸿文教育5周年庆生的人，和我一起送上祝福吧',                  
+                    tittle: '我是第18000位为鸿文教育5周年庆生的人，和我一起送上祝福吧',  
+                    appId: '<{$data["appId"]}>', 
+                    timestamp: '<{$data["timestamp"]}>', 
+                    nonceStr: '<{$data["nonceStr"]}>', 
+                    signature: '<{$data["signature"]}>', 
                     callBack: function (){}
                 };          
                 
@@ -32,5 +36,6 @@
 </head>
 <body>
   <h1>Hello 鸿文!</h1>
+  <h2><{$data['appId']}></h2>
 </body>
 </html>

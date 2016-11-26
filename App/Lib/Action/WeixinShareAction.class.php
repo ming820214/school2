@@ -24,7 +24,7 @@ class WeixinShareAction extends JssdkAction {
 	}
 	
 	public function hongwenshare(){
-		$link = $_GET['linked'];
+		/* $link = $_GET['linked'];
 		if($link){
 			$tk=M('access_share')->where('id=1')->find();
 			if(!$tk || $tk['expire_time']<time()){
@@ -37,7 +37,18 @@ class WeixinShareAction extends JssdkAction {
 			$this->ajaxReturn($data,'JSON');	
 		}else{
 			$this->display();
+		} */
+		
+		$tk=M('access_share')->where('id=1')->find();
+		if(!$tk || $tk['expire_time']<time()){
+			$data = $this->getSignPackage();
+		}else{
+			$data= $tk;
 		}
+		
+		$this->data = $data;
+		
+		$this->display();
 	}
 	
 //---首页-----
