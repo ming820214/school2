@@ -8,7 +8,7 @@ class CourseViewModel extends ViewModel {
         'OaCourseSbt'     => ['id' => 'sbt_id', 'teacher_id', 'subject_id', '_type' => 'left'],
         'OaCourse'        => ['id', 'state', 'std_id', 'name', 'unitprice', 'hour',
                              'ext_hour', 'factor', 'price', 'std_type','course',
-                             'used_hour', 'create_time', 'remark', 'std_type', '_type' => 'left', '_on' => 'OaCourse.id=OaCourseSbt.course_id'],
+                             'used_hour', 'create_time', 'remark', 'std_type','is_del', '_type' => 'left', '_on' => 'OaCourse.id=OaCourseSbt.course_id'],
         // 这里键值加空格原因http://www.thinkphp.cn/topic/31628.html
         'OaUser'          => ['name' => 'teacher', '_as' => 'u1',
                                             '_on' => 'u1.id=OaCourseSbt.teacher_id', '_type' => 'left'],
@@ -30,6 +30,7 @@ class CourseViewModel extends ViewModel {
             'OaCourse.std_id' => $std['std_id'],
             'OaCourse.state'  => 200, // 正常状态
             'OaCourse.used_hour'   => ['exp', '< OaCourse.hour+OaCourse.ext_hour'],//有可排剩余时间
+            'OaCourse.is_del' => 0
         ];
 
         if($course_id)$map['course_id']=$course_id;
