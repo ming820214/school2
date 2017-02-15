@@ -202,6 +202,22 @@
 	        if($('._bowarpper input[name="date"]')){
 	        	$('#showBtn').show();
 	        }
+		}else if(xuan == 5){
+			$(this).parent().append("<input name='student' type='text' placeholder='培训信息' class='in'/><input type='hidden' name='id' aa='student'>");
+			$('._bowarpper table').remove();
+			$('._bowarpper').prepend(htmlC);
+			
+	        if($('._bowarpper input[name="date"]')){
+	        	$('#showBtn').show();
+	        }
+		}else if(xuan == 6){
+			$(this).parent().append("<input name='student' type='text' placeholder='考核信息' class='in'/><input type='hidden' name='id' aa='student'>");
+			$('._bowarpper table').remove();
+			$('._bowarpper').prepend(htmlC);
+			
+	        if($('._bowarpper input[name="date"]')){
+	        	$('#showBtn').show();
+	        }
 		}
 	});
 
@@ -333,7 +349,7 @@ $('#filter_t').live('keyup',function(e){
 // 添加排课
 	$("#classadd").live('click', function(e) {
 		var box = $(this).parent().children(".over");
-		if($("#xuan").val()==2){
+		if($("#xuan").val()==2 || $("#xuan").val()==5 || $("#xuan").val()==6){
 			box.append(htmlD);
 		}else{
 			box.append(htmlB);
@@ -385,7 +401,7 @@ var returnArray = function( a ){
 function table_change(type){
 	if(type==1){
 		$("#tishi").empty();
-		if($("#xuan").val()==2){
+		if($("#xuan").val()==2 || $("#xuan").val()==5 || $("#xuan").val()==6){
 			$("._bowarpper").append(htmlC);
 		}else{
 			$("._bowarpper").append(htmlA);

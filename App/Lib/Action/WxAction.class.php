@@ -24,7 +24,7 @@ class WxAction extends CommwxtcAction {
             	if($cc!=$c){
 		        	$weekarray=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
 	            	$week=$weekarray[date('w',strtotime($val['timee']))];
-					if($val['stuid']==88888){
+					if(($val['stuid']==88888) || ($val['stuid']==99999) || ($val['stuid']==77777)){
 	            		$student=$val['other'];
 	            	}elseif($val['grade']){
 	            		$student=$val['grade']['name'];

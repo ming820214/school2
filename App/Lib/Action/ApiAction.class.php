@@ -29,7 +29,12 @@ class ApiAction extends CommAction {
             }else{
                 if($v['stuid']==88888){
                     $data[]=array('id'=>$v['id'],'nm'=>'试听课','t1'=>$v['time1'],'t2'=>$v['time2'],'class'=>$v['class'],'teacher'=>$v['teacher'],'date'=>$v['timee']);
-                }else{
+                }else if($v['stuid']==99999){
+                    $data[]=array('id'=>$v['id'],'nm'=>'培训课','t1'=>$v['time1'],'t2'=>$v['time2'],'class'=>$v['class'],'teacher'=>$v['teacher'],'date'=>$v['timee']);
+                }else if($v['stuid']==77777){
+                    $data[]=array('id'=>$v['id'],'nm'=>'考核课','t1'=>$v['time1'],'t2'=>$v['time2'],'class'=>$v['class'],'teacher'=>$v['teacher'],'date'=>$v['timee']);
+                }
+                else{
                     $data[]=array('id'=>$v['id'],'nm'=>$v['student']['name'],'t1'=>$v['time1'],'t2'=>$v['time2'],'class'=>$v['class'],'teacher'=>$v['teacher'],'date'=>$v['timee']);
                 }
             }

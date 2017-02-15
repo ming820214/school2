@@ -53,7 +53,7 @@ function maodun($list){
 
 //判断学员id和老师,查找到矛盾的数据记录,返回记录详情,遇id忽略（调课使用）
 function maodun2($t1,$t2,$date,$sid,$teacher,$id=0,$other){
-    if($sid==88888){
+    if(($sid==88888) || ($sid==99999) || ($sid==77777)){
       $map['other']=$other;//试听课查询冲突
       // return false;
     }else{
@@ -73,7 +73,7 @@ function maodun2($t1,$t2,$date,$sid,$teacher,$id=0,$other){
 //添加排课。一次添加一条
 function add_one($t1,$t2,$date,$kemu,$teacher,$tid,$stuid,$gid,$other,$course_id){
         $info=M('student')->where(['state'=>1])->find($stuid);
-        if($info || $stuid==88888){//检查学员状态
+        if($info || $stuid==88888 || $stuid==99999 || $stuid==77777){//检查学员状态
           $data['school']=session('school');
           $data['stuid']=$stuid;
           $data['std_id']=$info?$info['std_id']:0;
@@ -91,7 +91,7 @@ function add_one($t1,$t2,$date,$kemu,$teacher,$tid,$stuid,$gid,$other,$course_id
           $data['grade']=(int)$gid;
           $data['add']=session('user');
 		  
-          if($stuid==88888){
+          if($stuid==88888 || $stuid==99999 || $stuid==77777){
             $data['tid'] = D('TeacherView')->getTid_byname($teacher);
           }else{
             if((int)$data['course_id']<=0)return ['关联课程出错'];
@@ -110,7 +110,7 @@ function add_one($t1,$t2,$date,$kemu,$teacher,$tid,$stuid,$gid,$other,$course_id
 				return ['试听课排课不允许超出0.5课时！'];
 			}
 			
-            if(!D('CourseView')->allowpaike($data['course_id'],$data['count'])&&$stuid!=88888)return ['订单剩余可用课时不足'];
+            if(!D('CourseView')->allowpaike($data['course_id'],$data['count'])&&$stuid!=88888 && $stuid!=99999 && $stuid!=77777)return ['订单剩余可用课时不足'];
             if(strtotime($date)>time()-24*3600)
             return ['ok',M("class")->add($data)];
           }

@@ -134,21 +134,25 @@ height: 0.5px;
 													    <case value="102">二年级</case>
 													    <case value="103">一年级</case>
 													</switch>；学管：<{$vo2.xueguan}>；教主：<{$vo2.jiaoxue}>;
-                <if condition='$vo2.sid eq 88888'>
+                <if condition='($vo2.sid eq 88888) OR ($vo2.sid eq 99999) OR ($vo2.sid eq 77777)'>
                    	    学员：<{$vo2.other}>
                 </if>">
                     <{$vo2.t1}>--<{$vo2.t2}>
                 <notempty name="vo2.sid">
-                    <if condition="$vo2.sid neq 88888">
+                    <if condition="($vo2.sid neq 88888) AND ($vo2.sid neq 99999) AND ($vo2.sid neq 77777)">
                         <a href="<{:U('Class/all')}>?sid=<{$vo2.sid}>"><{$vo2.student}></a>◆
-                    <else />
+                    <elseif condition="$vo2.sid eq 99999"/>
+                      <a href="<{:U('Class/all')}>?sid=<{$vo2.sid}>">培训@</a>◆
+                    <elseif condition="$vo2.sid eq 77777"/>
+                      <a href="<{:U('Class/all')}>?sid=<{$vo2.sid}>">考核@</a>◆
+                    <else/>
                         <a href="<{:U('Class/all')}>?sid=<{$vo2.sid}>">试听@</a>◆
                     </if>
                 <else />
                     <a href="<{:U('Class/all')}>?gid=<{$vo2.gid}>"><{$vo2.grade}></a>★
                 </notempty>
                     <a href="<{:U('Class/all')}>?teacher=<{$vo2.teacher}>"><{$vo2.teacher}></a>
-                <if condition="$Think.get.sid eq 88888">
+                <if condition="($Think.get.sid eq 88888) OR ($Think.get.sid eq 99999) OR ($Think.get.sid eq 77777) ">
                     <br/><{$vo2.other}>
                 </if>
                 <if condition="$vo2.school neq $_SESSION['school']">
