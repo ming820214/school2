@@ -218,6 +218,14 @@
 	        if($('._bowarpper input[name="date"]')){
 	        	$('#showBtn').show();
 	        }
+		}else if(xuan == 7){
+			$(this).parent().append("<input name='student' type='text' placeholder='会议信息' class='in'/><input type='hidden' name='id' aa='student'>");
+			$('._bowarpper table').remove();
+			$('._bowarpper').prepend(htmlC);
+			
+	        if($('._bowarpper input[name="date"]')){
+	        	$('#showBtn').show();
+	        }
 		}
 	});
 
@@ -349,7 +357,7 @@ $('#filter_t').live('keyup',function(e){
 // 添加排课
 	$("#classadd").live('click', function(e) {
 		var box = $(this).parent().children(".over");
-		if($("#xuan").val()==2 || $("#xuan").val()==5 || $("#xuan").val()==6){
+		if($("#xuan").val()==2 || $("#xuan").val()==5 || $("#xuan").val()==6 || $("#xuan").val()==7){
 			box.append(htmlD);
 		}else{
 			box.append(htmlB);
@@ -401,7 +409,7 @@ var returnArray = function( a ){
 function table_change(type){
 	if(type==1){
 		$("#tishi").empty();
-		if($("#xuan").val()==2 || $("#xuan").val()==5 || $("#xuan").val()==6){
+		if($("#xuan").val()==2 || $("#xuan").val()==5 || $("#xuan").val()==6 || $("#xuan").val()==7){
 			$("._bowarpper").append(htmlC);
 		}else{
 			$("._bowarpper").append(htmlA);

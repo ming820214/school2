@@ -120,6 +120,8 @@ class ClassAction extends CommAction {
                         $data[$v['timee']]['data'][]=array('why'=>$v['why'],'school'=>$v['school'],'id'=>$v['id'],'state'=>$v['state'],'sid'=>'99999','student'=>'培训课','t1'=>$v['time1'],'t2'=>$v['time2'],'class'=>$v['class'],'teacher'=>$v['teacher'],'other'=>$v['other'],'s'=>$this->s($v['time1']));
                     }elseif($v['stuid']==77777){
                         $data[$v['timee']]['data'][]=array('why'=>$v['why'],'school'=>$v['school'],'id'=>$v['id'],'state'=>$v['state'],'sid'=>'77777','student'=>'考核课','t1'=>$v['time1'],'t2'=>$v['time2'],'class'=>$v['class'],'teacher'=>$v['teacher'],'other'=>$v['other'],'s'=>$this->s($v['time1']));
+                    }elseif($v['stuid']==66666){
+                        $data[$v['timee']]['data'][]=array('why'=>$v['why'],'school'=>$v['school'],'id'=>$v['id'],'state'=>$v['state'],'sid'=>'66666','student'=>'会议课','t1'=>$v['time1'],'t2'=>$v['time2'],'class'=>$v['class'],'teacher'=>$v['teacher'],'other'=>$v['other'],'s'=>$this->s($v['time1']));
                     }else{
                         $data[$v['timee']]['data'][]=array('why'=>$v['why'],'school'=>$v['school'],'id'=>$v['id'],'state'=>$v['state'],'sid'=>$v['stuid'],'student'=>$v['student'],'t1'=>$v['time1'],'t2'=>$v['time2'],'class'=>$v['class'],'teacher'=>$v['teacher'],'nianji'=>$v['gradeji'],'xueguan'=>$v['xueguan'],'jiaoxue'=>$v['jiaoxue'],'s'=>$this->s($v['time1']));
                     }

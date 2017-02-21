@@ -158,13 +158,14 @@
         <option value="1">班级：</option>
         <option value="2">试听：</option> -->
         
-        <if condition="$Think.session.school neq '培训部'">
+        <if condition="$Think.session.school neq '教学部'">
         	<option value="0">学员：</option>
 	        <option value="1">班级：</option>
 	        <option value="2">试听：</option>
 	        <else/>
 	        <option value="5">培训：</option>
 	        <option value="6">考核：</option>
+	        <option value="7">会议：</option>
         </if>
         
         </select>
@@ -215,7 +216,7 @@
       <if condition="$Think.get.sid neq ''"><{$name}><input type="hidden" name="stuid" value="<{$Think.get.sid}>"><elseif condition="$Think.get.gid neq ''"/><{$name}><input type="hidden" name="g" value="<{$Think.get.gid}>"><else/>
       <select class="xuan" id="xuan">
       <option value="4">全部</option>
-      <if condition="$Think.session.school neq '培训部'">
+      <if condition="$Think.session.school neq '教学部'">
       <option value="0">学员：</option>
       <option value="1">班级：</option>
       <option value="2">试听：</option>
@@ -223,6 +224,7 @@
       <else/>
       <option value="5">培训：</option>
       <option value="6">考核：</option>
+      <option value="7">会议：</option>
       </if>
       </select>
       </if>
@@ -404,6 +406,10 @@ function pclass() {
         var other=$("#myModal").find('input[name="student"]').val();
     }else if($("#xuan").val()==6){
         var id=77777;
+        var type='student';
+        var other=$("#myModal").find('input[name="student"]').val();
+    }else if($("#xuan").val()==7){
+        var id=66666;
         var type='student';
         var other=$("#myModal").find('input[name="student"]').val();
     }else if($("#xuan").val()==1 || $("#xuan").val()==0){
