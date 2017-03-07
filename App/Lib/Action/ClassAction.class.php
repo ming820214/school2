@@ -87,7 +87,15 @@ class ClassAction extends CommAction {
 		->order('cl.timee asc,cl.time1 asc,cl.teacher asc,cl.state asc')
 		->where($w)
 		->select();
-		
+
+		$tj['已排'] = 0;
+        $tj['待确认'] = 0;
+        $tj['已确认'] = 0;
+        $tj['旷课'] = 0;
+        $tj['不计时'] = 0;
+        $tj['不计确认'] = 0;
+        $tj['不计待认'] = 0;
+        $tj['不计旷课'] = 0;
 		
         $data=array();
         foreach ($m as $v) {
@@ -126,10 +134,24 @@ class ClassAction extends CommAction {
                         $data[$v['timee']]['data'][]=array('why'=>$v['why'],'school'=>$v['school'],'id'=>$v['id'],'state'=>$v['state'],'sid'=>$v['stuid'],'student'=>$v['student'],'t1'=>$v['time1'],'t2'=>$v['time2'],'class'=>$v['class'],'teacher'=>$v['teacher'],'nianji'=>$v['gradeji'],'xueguan'=>$v['xueguan'],'jiaoxue'=>$v['jiaoxue'],'s'=>$this->s($v['time1']));
                     }
                 }
+
+                
                 //统计数据
                 if($v['state']==0)$tj['待确认']+=$v['count'];
                 if($v['state']==1)$tj['已确认']+=$v['count'];
                 if($v['state']==2)$tj['旷课']+=$v['count'];
+                if(in_array($v['stuid'],array('66666','77777','88888','99999'))){
+                	$tj['不计时'] += $v['count'];
+                	if($v['state']==1){
+                		$tj['不计确认'] += $v['count'];
+                	}
+                	if($v['state']==0){
+                		$tj['不计待认'] += $v['count'];
+                	}
+                	if($v['state']==2){
+                		$tj['不计旷课'] += $v['count'];
+                	}
+                }
                 $tj['已排']+=$v['count'];
             }
             $ss=$s;
