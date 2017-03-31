@@ -252,7 +252,7 @@ class ClassAction extends CommAction {
                 if(!session('?user'))die;
 
 //         $g=M('class')->find($cid);
-        $g=M('class')->where("id=".$cid)->find($cid);
+        $g=M('class')->where("id=".$cid)->find();
         $d['state']=1;
         $d['qr']=session('user');
         if($why)$d['why']=$why;
@@ -273,7 +273,7 @@ class ClassAction extends CommAction {
                 if(!session('?user'))die;
 
 //         $g=M('class')->find($cid);
-        $g=M('class')->where("id=".$cid)->find($cid);
+        $g=M('class')->where("id=".$cid)->find();
         
         $d['state']=2;
         $d['qr']=session('user');
