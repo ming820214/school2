@@ -197,7 +197,8 @@ class ApiAction extends CommAction {
     }
     //调课提示
     public function ts($date,$cid){
-      $info=M('class')->find($cid);
+//       $info=M('class')->find($cid);
+    	$info=M('class')->where("id=". $cid)->find();
       $w['timee']=$_POST['date'];
       $w['stuid']=$info['stuid'];
       $m1=M('class')->where($w)->select();
