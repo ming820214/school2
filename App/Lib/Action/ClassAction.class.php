@@ -212,8 +212,8 @@ class ClassAction extends CommAction {
     //删除某排课
     public function delt($cid,$why,$tz=1){
                 if(!session('?user'))die;
-
-        $g=M('class')->find($cid);
+//         $g=M('class')->find($cid);
+        $g=M('class')->where("id=" . $cid)->find();
         $data=$g;
         if($g['grade']){
             $w0['id']=$g['grade'];
@@ -251,7 +251,8 @@ class ClassAction extends CommAction {
     public function qr($cid,$why=null){
                 if(!session('?user'))die;
 
-        $g=M('class')->find($cid);
+//         $g=M('class')->find($cid);
+        $g=M('class')->where("id=".$cid)->find($cid);
         $d['state']=1;
         $d['qr']=session('user');
         if($why)$d['why']=$why;
@@ -271,7 +272,9 @@ class ClassAction extends CommAction {
     public function kk($cid,$why){
                 if(!session('?user'))die;
 
-        $g=M('class')->find($cid);
+//         $g=M('class')->find($cid);
+        $g=M('class')->where("id=".$cid)->find($cid);
+        
         $d['state']=2;
         $d['qr']=session('user');
         $d['why']=$why;
@@ -291,7 +294,8 @@ class ClassAction extends CommAction {
     public function change(){
         if(!session('?user'))die;
 
-        $info=M('class')->find($_POST['cid']);
+//         $info=M('class')->find($_POST['cid']);
+        $info=M('class')->where("id=". $_POST['cid'])->find();
         $data=$info;
         $d['timee']=$this->_post('date');
         $d['time1']=$this->_post('time1');
