@@ -4,7 +4,7 @@ return array(
 	'TMPL_L_DELIM'=>'<{',
 	'TMPL_R_DELIM'=>'}>',
 
-	'SHOW_PAGE_TRACE'        =>1,  //开启调试模式
+	'SHOW_PAGE_TRACE'        =>0,  //开启调试模式
 	'URL_CASE_INSENSITIVE' =>true,//关闭路径区分大小写
 	// 'DB_PREFIX' => 'smeoa_', // 数据库表前缀
 	'DB_PREFIX' => '', // 数据库表前缀
