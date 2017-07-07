@@ -403,6 +403,7 @@ class ClassAction extends CommAction {
         $w['school']=session('school');
         $m2=M('school')->where($w)->find();
         $data2['record']=$info.',操作人,'.session('user').',时间,'.time().'#'.$m2['record'];
+        $info_record = $info.',操作人,'.session('user').',时间,'.time();
         M('school')->where($w)->save($data2);
 		
 		$tmp = M('hongwen_oa.dt_record','oa_');
@@ -437,6 +438,7 @@ class ClassAction extends CommAction {
 		$cl->operator = session('user');
 		$cl->dtk_time = date('Y-m-d');
 		$cl->dtk_type = $info_arr[0];
+		$cl->record = $info_record;
 		
 		$result = $tmp->data($cl)->add();
 		
