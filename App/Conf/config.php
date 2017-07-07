@@ -8,8 +8,8 @@ return array(
 	'URL_CASE_INSENSITIVE' =>true,//关闭路径区分大小写
 	// 'DB_PREFIX' => 'smeoa_', // 数据库表前缀
 	'DB_PREFIX' => '', // 数据库表前缀
-	'DB_DSN' => 'mysql://root:ihongwen@localhost:1209/hw001',
-	'HW001_DSN' => 'mysql://root:ihongwen@localhost:1209/hongwen_oa',
+	'DB_DSN' => 'mysql://SeaOA:*Sea^09!1_1@localhost:1209/hw001',
+	'HW001_DSN' => 'mysql://SeaOA:*Sea^09!1_1@localhost:1209/hongwen_oa',
 	'TMPL_TEMPLATE_SUFFIX'=>'.html',
 	'VAR_URL_PARAMS'      => '_URL_', // PATHINFO URL参数变量
 	'VAR_FILTERS'=>'htmlspecialchars',
