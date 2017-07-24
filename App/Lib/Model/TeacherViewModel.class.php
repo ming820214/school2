@@ -31,10 +31,7 @@ class TeacherViewModel extends ViewModel {
     * 根据姓名，查询老师的id
     */
     public function getTid_byname($name){
-        $this->db(1);
-        return M('user')->where([
-            'name' => $name,
-            'is_del' => 0,
-            ])->getField('id');
+        //$this->db(1, C('HW001_DSN'));
+        return M('user',"oa_",C('HW001_DSN'))->where(['name' => $name,'is_del' => 0])->getField('id');
     }
 }
