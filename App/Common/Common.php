@@ -64,9 +64,19 @@ function maodun2($t1,$t2,$date,$sid,$teacher,$id=0,$other){
     $w['timee']=$date;
     $w['_complex']= $map;
     if($id)$w['id']=['neq',$id];
-    $m=M('class')->where($w)->select();
+//     $m=M('class')->where($w)->select(); 优化性能
+
+   /*  $m=M('class')->where($w)->field('timee,teacher,time1,time2')->select();
     foreach ($m as $v) {
         if(!($v['time1']>=$t2||$v['time2']<=$t1))return $v;
+    } //将此处的程序代码转为数据库SQL语句从而进一步提高系统的性能； 
+    */
+    
+    $w['_string'] = " (NOT (time1>='" . $t2 . "' OR time2<='" . $t1 . "')) ";
+    $m = M('class')->where($w)->field('timee,teacher,time1,time2')->select();
+    
+    if($m && count($m)>0){
+       return $m[0];
     }
 }
 
@@ -81,7 +91,12 @@ function add_one($t1,$t2,$date,$kemu,$teacher,$tid,$stuid,$gid,$other,$course_id
           if($gid){
             $data['course_id']=M('stu_grade')->where(['gid'=>$gid,'stuid'=>$stuid])->getField('course_id');
           }
-          $data['timee']=$date;
+          if($date && ($date != '0000-00-00' && $date != '0000-00-00 00:00:00')){
+            $data['timee']=$date;
+          }else{
+           return ['课程日期 0000-00-00 出错' . $date];
+          }
+//           $data['timee']=$date;
           $data['time1']=$t1;
           $data['time2']=$t2;
           $data['class']=$kemu;
@@ -111,8 +126,17 @@ function add_one($t1,$t2,$date,$kemu,$teacher,$tid,$stuid,$gid,$other,$course_id
 			}
 			
             if(!D('CourseView')->allowpaike($data['course_id'],$data['count'])&&$stuid!=88888 && $stuid!=99999 && $stuid!=77777 && $stuid!=66666)return ['订单剩余可用课时不足'];
-            if(strtotime($date)>time()-24*3600)
-            return ['ok',M("class")->add($data)];
+            /* if(strtotime($date)>time()-24*3600) 针对一对一订单学员排课冲突的问题解决，此处涉及到class表的触发器操作；
+            return ['ok',M("class")->add($data)]; */
+            if(strtotime($date)>time()-24*3600){
+                 $id = M("class")->add($data);
+                  if($id){
+                   return ['ok',$id];
+                  }else{
+                   return ['该时间段有冲突！','数据添加失败！'];
+                  }
+            }
+             
           }
         }else{
           return ['学员状态非正常'];
