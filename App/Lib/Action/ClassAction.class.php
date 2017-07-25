@@ -339,7 +339,7 @@ class ClassAction extends CommAction {
                                 //==============操作记录结束
             }
         }
-            if($jg && $d['timee']){
+            if($jg && $d['timee'] && $d['timee'] != '0000-00-00' && $d['timee'] != '0000-00-00 00:00:00'){
                 M('class')->where($w)->save($d);
 				
 				$remark = $_POST['remark'];
