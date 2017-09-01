@@ -37,6 +37,7 @@ class SendAction extends Action {
 			$msg['text']['content']=$message;
 // 		if($this->send($msg))return true;
 			$this->send($msg);
+			return true;
 	}
 
 //发送数据
