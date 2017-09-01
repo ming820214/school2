@@ -291,7 +291,7 @@ class ClassAction extends CommAction {
     }
 
     //个人和班级课表变更
-    public function change(){
+    public function changeClassInfo(){
         if(!session('?user'))die;
 
 //         $info=M('class')->find($_POST['cid']);
