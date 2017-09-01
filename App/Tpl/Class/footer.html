@@ -248,7 +248,7 @@
 
 
 
-<form action="<{:U('Class/changeClassInfo')}>" method="post">
+<form id="classform" action="<{:U('Class/changeClassInfo')}>" method="post">
   <div id="myModal3" class="reveal-modal"><a class="close-reveal-modal">&#215;</a>
     <h2>变更排课：<input type="hidden" name="cid"></h2>
     <hr/>
@@ -257,7 +257,7 @@
         </div>
         <div class="row">
 			    	<div style="float:left;margin-top:15px;">上课要求：</div><textarea name="remark" rows="3" cols="65" placeholder="可以在此提出对上课老师的要求，字数限制60以内!" maxlength="60"></textarea>
-			    	<div style="float:right;margin-right: 120px;margin-top: 15px;"><input type="submit" name="change" value="确认变更"></div>
+			    	<div style="float:right;margin-right: 120px;margin-top: 15px;"><input id="ChangeClassInfo" type="submit" name="change" value="确认变更"></div>
         </div>
       </div>
     <div class="tishi2" align="center" style="padding:0px;">
