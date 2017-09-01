@@ -35,7 +35,8 @@ class SendAction extends Action {
 			$msg['msgtype']='text';
 			$msg['agentid']=$app;
 			$msg['text']['content']=$message;
-		if($this->send($msg))return true;
+// 		if($this->send($msg))return true;
+			$this->send($msg)
 	}
 
 //发送数据
