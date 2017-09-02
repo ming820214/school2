@@ -29,8 +29,10 @@ class SendAction extends Action {
 		}else{
 			$w['name']=$name;
 			$w['state']=1;
-			$m=M('hw003.person_all',null)->where($w)->find();
-			$msg['touser']=$m['userid'];
+// 			$m=M('hw003.person_all',null)->where($w)->find();
+// 			$msg['touser']=$m['userid'];
+			$userid = M('hw003.person_all',null)->where($w)->getField('userid');
+			$msg['touser']=$userid;
 		}
 			$msg['msgtype']='text';
 			$msg['agentid']=$app;
@@ -44,6 +46,11 @@ class SendAction extends Action {
 	public function send($msg){
 		//接收到要发送的数据
 		$post=$this->ch_json_encode($msg);
+		
+		//针对查询不到人员的情况，此处做特殊处理 ，edit by zhangxm at 2017-09-02 17:28
+		if(!$msg['touser']){
+		    return true;
+		}
 		//获取access_tokon
 		$tk=M('access')->where('id=2')->find();
 		//判断tokon是否过期
@@ -75,6 +82,7 @@ class SendAction extends Action {
 		}else{
 				$urll='https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token='.$tk['tokon'];
 		}
+		        //发送消息到微信上
 				$ch = curl_init($urll);
 			    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
@@ -82,6 +90,40 @@ class SendAction extends Action {
 			    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
 		        $output = curl_exec($ch);
 		        curl_close($ch);
+		        
+		        //如果其他系统程序更新了该token值，那么返回false之后，再次获取该值
+		        if(!$output){
+		            $CorpID='wx48efe07c32d6e8fa';
+		            $Secret='JrQ85DM3IQetnZDXTrifzYiDuu1lMYlSE4bSx2SSy3Y0ouh6ltDQRwliUTHRfm0Q';
+		            
+		            $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=$CorpID&corpsecret=$Secret";
+		            $ch = curl_init($url);
+		            curl_setopt($ch, CURLOPT_HEADER, 0);
+		            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		            curl_setopt($ch, CURLOPT_POST, 0);
+		            curl_setopt($ch, CURLOPT_SSLVERSION,CURLOPT_SSLVERSION_TLSv1);
+		            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		            $output = curl_exec($ch);
+		            curl_close($ch);
+		            $output = stripslashes($output);//获取到json格式的token和时间限制数据
+		            // echo($output);
+		            $access_token =json_decode($output, true);//转成数组
+		            $access_token = $access_token['access_token'];//获取到值
+		            $date['tokon']=$access_token;
+		            $date['timestamp']=time();
+		            M('access')->where('id=2')->save($date);
+		            //发送数据=================
+		            $urll='https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token='.$access_token;
+		            
+		            $ch = curl_init($urll);
+		            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		            curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+		            curl_setopt($ch, CURLOPT_SSLVERSION,CURLOPT_SSLVERSION_TLSv1);
+		            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+		            $output = curl_exec($ch);
+		            curl_close($ch);
+		        }
+		        
 				$output = stripslashes($output);
 				$out =json_decode($output, true);//转成数组
 				if($out['errmsg']=='ok')return true;
