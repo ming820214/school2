@@ -305,7 +305,6 @@ class ClassAction extends CommAction {
 		if($info['stuid'] == 88888 && $d['count']>0.5){
 			$this->error('试听课排课不允许超出0.5课时！');
 		}
-		
         $why=$this->_post('why');
         $d['why']=$info['why'].'|'.$why;
         if($info['grade']){
@@ -340,8 +339,10 @@ class ClassAction extends CommAction {
             }
         }
             if($jg && $d['timee'] && $d['timee'] != '0000-00-00' && $d['timee'] != '0000-00-00 00:00:00'){
-                M('class')->where($w)->save($d);
-				
+                $res = M('class')->where($w)->save($d);
+				 // var_dump(M('class')->getError());
+     //             var_dump($res);
+     //             var_dump(M('class')->getDbError());die;
 				$remark = $_POST['remark'];
 				if($remark){
 					$requires = '\n具体排课要求如下：' . $remark ;	
