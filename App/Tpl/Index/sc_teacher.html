@@ -50,6 +50,7 @@ margin-left: 100px;
     <th width="14%" scope="col">生物</th>
     <th width="14%" scope="col">文综</th>
     <th width="14%" scope="col">美术</th>
+    <th width="14%" scope="col">早教</th>
   </tr>
   <tr>
     <td><volist name='t1' id='t1'><p>&nbsp;&nbsp;<{$t1.name}>&nbsp;※&nbsp;<a href="__URL__/sc_delt/id/<{$t1.id}>">删除</a></p></volist></td>
@@ -60,6 +61,7 @@ margin-left: 100px;
     <td><volist name='t6' id='t1'><p>&nbsp;&nbsp;<{$t1.name}>&nbsp;※&nbsp;<a href="__URL__/sc_delt/id/<{$t1.id}>">删除</a></p></volist></td>
     <td><volist name='t7' id='t1'><p>&nbsp;&nbsp;<{$t1.name}>&nbsp;※&nbsp;<a href="__URL__/sc_delt/id/<{$t1.id}>">删除</a></p></volist></td>
     <td><volist name='t8' id='t1'><p>&nbsp;&nbsp;<{$t1.name}>&nbsp;※&nbsp;<a href="__URL__/sc_delt/id/<{$t1.id}>">删除</a></p></volist></td>
+    <td><volist name='t9' id='t1'><p>&nbsp;&nbsp;<{$t1.name}>&nbsp;※&nbsp;<a href="__URL__/sc_delt/id/<{$t1.id}>">删除</a></p></volist></td>
   </tr>
 </table>
 <form action="" method="post">
@@ -75,6 +77,7 @@ margin-left: 100px;
       <option>生物</option>
       <option>文综</option>
       <option>美术</option>
+      <option>早教</option>
     </select>
   <input class="bt" type="submit" name="add" value="新增保存"/>
 </div>

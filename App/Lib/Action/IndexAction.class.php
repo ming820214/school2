@@ -159,6 +159,9 @@ class IndexAction extends CommAction {
                 $this->t7=M('teacher')->where($data)->select();
                 $data['class']='美术';
                 $this->t8=M('teacher')->where($data)->select();
+                $data['class']='早教';
+                $this->t9=M('teacher')->where($data)->select();
+                
                 $this->display('aaa:teacher');
         }
 
