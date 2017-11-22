@@ -163,6 +163,24 @@
 	// var s = time.getSeconds()+1;
 	return y+'-'+add0(m)+'-'+add0(d);
 	}
+	
+	
+	function date_format (shijianchuo,fmt) { //author: meizz 
+		var str = new Date(shijianchuo);
+	    var o = {
+	        "M+": str.getMonth() + 1, //月份 
+	        "d+": str.getDate(), //日 
+	        "h+": str.getHours(), //小时 
+	        "m+": str.getMinutes(), //分 
+	        "s+": str.getSeconds(), //秒 
+	        "q+": Math.floor((str.getMonth() + 3) / 3), //季度 
+	        "S": str.getMilliseconds() //毫秒 
+	    };
+	    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (str.getFullYear() + "").substr(4 - RegExp.$1.length));
+	    for (var k in o)
+	    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+	    return fmt;
+}
 
 // 根据排课类型输出定位项
 	$("#xuan").live('change', function(e) {
@@ -344,10 +362,10 @@ $('#filter_t').live('keyup',function(e){
 		var d=$(this).parent().children("div").children("div").last().find("input[name$='date']").val();
 		if(d){
 		var date = new Date(d);
-		// alert(date.getTime()/1000);
-		var week=date.getTime()+6*24*3600*1000;
-		// alert(week);
-		week=format(week);
+		var week=date.getTime()+7*24*3600*1000;
+//		week=format(week); format函数算法有问题，导致0000-00-00问题，重写format函数为date_format
+		week = date_format(week,'yyyy-MM-dd');
+		
 		$(this).parent().children("div").append("<div class='row2'><input  name='date'  class='Wdate' type='text' onfocus=\"WdatePicker({minDate:'%y-%M-{%d}'})\" style='width: 100px;margin: 5px;' readonly='readonly' value='"+week+"'/></div>");
 		}else{
 			alert("请选择循环星期的起点，先选择第一天！");
