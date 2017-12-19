@@ -85,19 +85,27 @@ class ApiAction extends CommAction {
         $gid=0;
         if($_POST['type']=='grade'){
             $gid=$_POST['id'];
-            $stuids=M('stu_grade')->where(['gid'=>$_POST['id']])->getField('stuid',true);
+            //$stuids=M('stu_grade')->where(['gid'=>$_POST['id']])->getField('stuid',true);
+            $stuids=M('stu_grade')->where(['gid'=>$_POST['id']])->getField('stuid,course_id');
+            
         }
-        foreach ($stuids as $stuid) {
-            foreach ($list as $v) {
-            	$ban=get_ban($v['t1'],$v['t2'],$v['date'],$v['teacher']);
-            	if($ban)$this->ajaxReturn(['state'=>4,'info'=>$ban[0]]);
-                $aa=maodun2($v['t1'],$v['t2'],$v['date'],$stuid,$v['teacher'],0,$v['other']);
-                if($aa)$this->ajaxReturn(['state'=>'2','info'=>'有撞课信息','data'=>$aa]);
+        foreach ($stuids as $stuid=>$courseOfId) {
+            if($courseOfId){
+                foreach ($list as $v) {
+                    $ban=get_ban($v['t1'],$v['t2'],$v['date'],$v['teacher']);
+                    if($ban)$this->ajaxReturn(['state'=>4,'info'=>$ban[0]]);
+                    $aa=maodun2($v['t1'],$v['t2'],$v['date'],$stuid,$v['teacher'],0,$v['other']);
+                    if($aa)$this->ajaxReturn(['state'=>'2','info'=>'有撞课信息','data'=>$aa]);
+                }
+            }else{
+                $this->ajaxReturn(['state'=>'1','info'=>'该小组有成员未绑定订单，请纠正后再排课！！']);
+                break;
             }
+            
         }
 
         //添加排课
-        foreach ($stuids as $stuid) {
+        foreach ($stuids as $stuid=>$courseOfId) {
             foreach ($list as $v) {
                 $add=add_one($v['t1'],$v['t2'],$v['date'],$v['kemu'],$v['teacher'],$v['tid'],$stuid,$gid,$v['other'],$v['course_id']);
                 if($add[0]!='ok'){
