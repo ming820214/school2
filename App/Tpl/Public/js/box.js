@@ -184,15 +184,18 @@
 
 // 根据排课类型输出定位项
 	$("#xuan").live('change', function(e) {
+		$('#tishi').text('');
 		$('#showBtn').hide();
+		$('._bowarpper table').remove();
 		// alert($(this).val());
 		var xuan=$(this).val();
 		$(this).nextAll().remove();
 		if(xuan==0){
 			$(this).parent().append("<select class='xuan' id='p'><option></option><option>※</option><option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>J</option><option>K</option><option>L</option><option>M</option><option>N</option><option>O</option><option>P</option><option>Q</option><option>R</option><option>S</option><option>T</option><option>W</option><option>X</option><option>Y</option><option>Z</option></select><select class='xuan' id='_stuid' name='id' aa='student'></select>");
+			$(this).parent().append("<span>&nbsp;&nbsp;筛选：<input type='text' name='filter_s' id='filter_s'/></span");
 		}else if(xuan==1){
 			$(this).parent().append("<select class='xuan' name='id' id='_gid' aa='grade'></select>");
-			$(this).parent().append("&nbsp;&nbsp;筛选：<input type='text' name='filter_t' id='filter_t'/>");
+			$(this).parent().append("<span>&nbsp;&nbsp;筛选：<input type='text' name='filter_t' id='filter_t'/></span>");
 			var g=$(this).next();
 			      $.ajax({
 			         url: url+"/Api/grade",
@@ -261,6 +264,19 @@ $('#filter_t').live('keyup',function(e){
 	$("#_gid").change();
 });
 
+$('#filter_s').live('keyup',function(e){
+	$('#_stuid option').show();
+	$('#_stuid option').each(function(){
+		if($(this).text().indexOf($('#filter_s').val()) == -1){
+			$(this).attr('dq','1'); //该属性，无任何意义，就是为了实现某种显示效果
+			$(this).hide();
+		}else{
+			$(this).attr('dq','2');
+		}
+	});
+	$('#_stuid option[dq=2]:first').prop('selected',true)
+	$("#_stuid").change();
+});
 
 //根据姓名首字母输出选项
 	$("#p").live('change',function(){
@@ -294,6 +310,7 @@ $('#filter_t').live('keyup',function(e){
 		$('#showBtn').hide();
 		$('#tishi').text('');
 		$('._bowarpper table').remove();
+		$('#showBtn').css('display','none');
 		if($('#_stuid').val()!=null){
 		$.ajax({
 				url: url+"/Api/course",
@@ -305,10 +322,18 @@ $('#filter_t').live('keyup',function(e){
 		        	if(msg != null){
 		        		if(msg.length){
 							$('._bowarpper table').remove();
+							//$('#showBtn').css('display','none');
 				         	init(msg);
+				         	//$('#showBtn').css('display','block');
+			         	}else{
+			         		$('#tishi').text('该学员没有可用订单！');
+			         		$('._bowarpper table').remove();
+			         		$('#showBtn').css('display','none');
 			         	}
 		        	}else{
 			         	$('#tishi').text('该学员没有可用订单！');
+			         	$('._bowarpper table').remove();
+			         	$('#showBtn').css('display','none');
 			        }
 		         	
 		        }
@@ -321,6 +346,7 @@ $('#filter_t').live('keyup',function(e){
 		$('#showBtn').hide();
 		$('#tishi').text('');
 		$('._bowarpper table').remove();
+		$('#showBtn').css('display','none');
 		if($('#_gid').val()!=null){
 	        $.ajax({
 		         url: url+"/Api/course_gid",
@@ -333,11 +359,16 @@ $('#filter_t').live('keyup',function(e){
 		        		if(msg.length){
 							$('._bowarpper table').remove();
 				         	init(msg);
+				         	//$('#showBtn').css('display','block');
 			         	}else{
+			         		$('._bowarpper table').remove();
 			         		$('#tishi').text('该学员没有可用订单！');
+			         		$('#showBtn').css('display','none');
 			         	}
 		        	}else{
+		        			$('._bowarpper table').remove();
 			         		$('#tishi').text('该学员没有可用订单！');
+			         		$('#showBtn').css('display','none');
 			         	}
 		        }
 
