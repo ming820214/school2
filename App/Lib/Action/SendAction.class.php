@@ -54,7 +54,7 @@ class SendAction extends Action {
 		//获取access_tokon
 		$tk=M('access')->where('id=2')->find();
 		//判断tokon是否过期
-		if(($tk['timestamp']+7000)<time() or $tk['tokon']==''){
+		if(($tk['timestamp']+7000)<time() || $tk['tokon']==''){
 //					$CorpID='wx965351f4462ae3ba';
 //			 		$Secret='8fYYV_V5kfCCggQuBaoc4pLkJw2d_G7KtEuPlzSMk2YEy7FHoZvImEAuBu1vrwGn';
 					
