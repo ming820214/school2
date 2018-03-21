@@ -127,6 +127,7 @@ class SendAction extends Action {
 				$output = stripslashes($output);
 				$out =json_decode($output, true);//转成数组
 				if($out['errmsg']=='ok')return true;
+				return true;
 	}
 
 //解决json将中文编码编码问题
