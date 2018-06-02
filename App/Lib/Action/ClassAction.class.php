@@ -1,7 +1,7 @@
 <?php
 // 本类由系统自动生成，仅供测试用途
 class ClassAction extends CommAction {
-
+    
     public function day($d){//显示指定日期所有课程
 
         $m=D('Class');
@@ -52,11 +52,13 @@ class ClassAction extends CommAction {
             $ee=$datexx.'-'.'01';
             $c=strtotime($ee);
             $cc=$c+date('t',$c)*24*3600;//获取月末时间戳
+            $lastD=$c+date('t',$c)*24*3600-24*3600;//获取月末时间戳
         }else{
             $datexx=date('Y-m');
             $ee=$datexx.'-'.'01';
             $c=strtotime(date('Y-m-01'));//获取月初时间戳
             $cc=$c+date('t',$c)*24*3600;//获取月末时间戳
+            $lastD=$c+date('t',$c)*24*3600-24*3600;//获取月末时间戳
         }
         //oa系统学员匿名查询排课
         if(session('?schooll')&&!session('?school')){
@@ -65,24 +67,31 @@ class ClassAction extends CommAction {
             $w['cl.school']=$_SESSION['school'];
         }
 
-        if($sid)$w['cl.stuid']=$sid;
-        if($gid)$w['cl.grade']=$gid;
+//         if($sid)$w['cl.stuid']=$sid;
+//         if($gid)$w['cl.grade']=$gid;
+        
+        if($sid)$w['st.id']=$sid;
+        if($gid)$w['gd.id']=$gid;
+        
+        
         if($teacher){
             $w['cl.teacher']=$teacher;
             unset($w['cl.school']);
 			//教师禁排规则
 //			$ban = M('hw001.ban_rules')->where(['name'=>$teacher])->select();
         }
-        $w['cl.timee']=array('like',"$datexx%");
-		
+        
+        //$w['cl.timee']=array('like',"$datexx%");
+        $w['cl.timee']=array('between',array(date('Y-m-d',$c),date('Y-m-d',$lastD)));
+        
 		
 //      $m=D('Class')->relation(true)->where($w)->order('timee asc,time1 asc,teacher asc,state asc')->select();
 		
 		$cl = M('class');
 		
 		$m = $cl->alias('cl')
-		->join(' hw001.student as st on cl.stuid = st.id')
-		->join('school_grade as gd on cl.grade = gd.id')
+		->join(' hw001.student as st on st.id=cl.stuid ')
+		->join('school_grade as gd on gd.id = cl.grade')
 		->field('cl.id ,cl.school, st.name as student,st.xueguan as xueguan,st.jiaoxue as jiaoxue,st.grade as gradeji,gd.id as gid,gd.name as grade,cl.stuid, cl.std_id, cl.course_id, cl.state, cl.tid, cl.teacher, cl.fankui, cl.class, cl.time1, cl.time2, cl.count, cl.timee, cl.other, cl.why, cl.add, cl.qr, cl.tqr,  cl.cwqr, cl.timestamp')
 		->order('cl.timee asc,cl.time1 asc,cl.teacher asc,cl.state asc')
 		->where($w)

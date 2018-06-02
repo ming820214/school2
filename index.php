@@ -5,7 +5,7 @@
     //定义项目路径
     define('APP_PATH', './App/');
 
-	define('APP_DEBUG',0);
+	define('APP_DEBUG',1);
 
     require( "./ThinkPHP/ThinkPHP.php");
 

@@ -93,12 +93,19 @@ class CourseViewModel extends ViewModel {
     * @return float           未被确认的课时数
     */
     public function getUnconfirmedCount($courseId, $stdId) {
-        return (float)(M('class')->where([
+        /* return (float)(M('class')->where([
                 'course_id' => $courseId,
                 'std_id' => $stdId,
                 'state' => ['in','0,1'],
                 'cwqr'  => '', // 待确认的课
-                ])->sum('count'));
+                ])->sum('count')); */
+        
+        return (float)(M('class')->where([
+            'std_id' => $stdId,
+            'course_id' => $courseId,
+            'state' => array('between','0,1'),
+            'cwqr'  => '', // 待确认的课
+        ])->sum('count'));
     }
 
     /**
